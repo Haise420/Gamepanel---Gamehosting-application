@@ -1,0 +1,181 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Backup</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">420 <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+
+    <div class="content">
+        <hr class="hr">
+    <div class="backup-content">
+        <div class="backup-header">
+            
+            <div class="backup-img">
+                <img src="{% static 'images/nav-backup.png' %}" alt="" class="backup-image">
+            </div>
+            <div class="backup-text">
+                <h3>Backup</h3>
+                <p>
+     Ovde mozete da backupujete vas server u proslo stanje ukoliko dodje do kvara ili gubitka podataka.</p>
+            </div>
+        </div>
+        <div class="factory-reset">
+            <div class="factory-reset-text">  Factory Reset <br> Ovde mozete da vratite vas server na pocetna podesavanja instaliranog moda. Ako pritisnete dugme za fabricka podesavanja vasi sadasnji dokumenti ce biti izgubljeni.
+                <br><br>!!!
+            </div>
+            <div class="factory-reset-tab">
+                <button class="factory-reset-btn" data-url="{% url 'factory_restart_server' server.id %}">Factory Reset</button>
+            </div>
+        </div>
+        <div class="backup-todate">
+            backup todate
+        </div>
+
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+
+<script src="{% static 'js/cs.js' %}"></script>
+
+<script>
+document.querySelector('.factory-reset-btn').addEventListener('click', function (event) {
+    // Alert za potvrdu akcije
+    var confirmed = confirm("Da li ste sigurni da želite izvršiti resetovanje servera?");
+
+    if (confirmed) {
+        // Alert za obaveštenje o izvršenju akcije
+        alert("Resetovanje servera će započeti. Molimo sačekajte 3-4minuta dok server ne dobije sve potrebe fajlove za startovanje servera!.");
+
+        event.preventDefault();  // Sprječi uobičajeno ponašanje klika
+
+        var divElement = event.currentTarget;
+        var apiUrl = divElement.getAttribute('data-url');
+
+        // AJAX poziv ka API URL-u
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', apiUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                // Osveži stranicu nakon što dobijemo odgovor od API-ja
+                setTimeout(function () {
+                    // Osveži stranicu nakon 5 sekundi
+                    location.reload();
+                }, 5000);
+            }
+        };
+
+        // Pošalji prazan JSON objekat jer tvoj API view očekuje POST podatke
+        xhr.send(JSON.stringify({}));
+    }
+});
+</script>
+
+
+<script>
+// Inicijalno sakrij sve div-ove osim "overview-content"
+const elementsToHide = document.querySelectorAll('.hidden');
+for (const element of elementsToHide) {
+element.style.display = 'none';
+}
+
+function toggleVisibility(target) {
+// Sakrij sve div-ove sa klasom "hidden"
+for (const element of elementsToHide) {
+element.style.display = 'none';
+}
+
+// Prikaži ciljni div
+const targetElement = document.querySelector(`.${target}-content`);
+if (targetElement) {
+targetElement.style.display = 'block';
+}
+}
+</script>
+
+
+
+
+</body>
+</html>

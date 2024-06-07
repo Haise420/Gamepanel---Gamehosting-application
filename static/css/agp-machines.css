@@ -1,0 +1,77 @@
+body{
+    background-color: black;
+}
+
+.wrapper{
+    display: grid;
+    grid-template: 'nav main main main'
+                   'nav main main main';
+    justify-content: center;
+    max-width: 100%;
+    height: 1200px;
+    gap: 15px;
+}
+.box-img{
+    width: 216px;
+    height: 160px;
+}
+.nav{
+    grid-area: nav;
+    border: 1px solid white;
+    width: 200px;
+    height: 100%;
+}
+
+.main{
+    grid-area: main;
+    width: 1200px;
+    height: 100%;
+    border: 1px solid white;
+}
+
+.uptime-graph{
+    width: 100%;
+    height: 20%;
+    border: 1px solid white;
+}
+
+.machine-content{
+    width: 100%;
+    height: 80%;
+    border: 1px solid white;
+}
+
+.machine-header{
+    width: 100%;
+    height: 15%;
+    border: 1px solid white;
+    display: flex;
+}
+
+.add-machine{
+    width: 33%;
+    height: 99%;
+    border: 1px solid white;
+    margin-left: 33%;
+}
+
+.error-logs{
+    width: 33%;
+    height: 99%;
+    border: 1px solid white;
+}
+
+.machine-main{
+    width: 100%;
+    height: 84%;
+    border: 1px solid white;
+    display: flex;
+}
+
+.machine-box{
+    margin-top: 20px;
+    width: 18%;
+    height: 20%;
+    border: 1px solid white;
+    margin-left: 17px;
+}

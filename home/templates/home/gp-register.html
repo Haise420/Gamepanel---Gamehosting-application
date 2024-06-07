@@ -1,0 +1,43 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Register</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapperlogin">
+            <div class="mainlogin">
+                <form method="post" action="{% url 'gp-register' %}">
+                    {% csrf_token %}
+                    <div class="registerclass">
+                        <img src="{% static 'images/user.png' %}" class="usernameicon">
+                        <img src="{% static 'images/password.png' %}" class="passwordicon-register">
+                        <img src="{% static 'images/repassword.png' %}" class="repasswordicon">
+                        <img src="{% static 'images/mail.png' %}" class="emailicon">
+                        <input type="text" name="name" placeholder="Unesite Vase korisnicko ime" class="registerunos">
+                        <input type="password" name="password" placeholder="Unesite Vasu lozinku" class="registerunos">
+                        <input type="password" name="confirm_password" placeholder="Unesite ponovo Vasu lozinku" class="registerunos">
+                        <input type="email" name="email" placeholder="Unesite Vas email" class="registerunos">
+                    </div>
+                    <button type="submit" class="registerdugme">
+                        Registruj se
+                    </button>
+                </form>
+                <a href="{% url 'gp-login' %}" class="napravinalog">
+                    Imam nalog
+                </a>
+            </div>
+            <div class="mainimg">
+                <img src="{% static 'images/loginslika.png' %}" class="slika"> 
+            </div>
+    
+        </div>
+    </div>
+   
+    
+</body>
+</html>

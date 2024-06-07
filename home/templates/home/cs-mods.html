@@ -1,0 +1,228 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Mods</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">420 <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+    
+                
+    <div class="content">
+        <hr>
+    <div class="mods-content">
+        <div class="mods-header">
+            <div class="mods-img">
+                <img src="{% static 'images/nav-mods.png' %}" alt="" class="mods-image">
+            </div>
+            <div class="mods-text">
+                <h3>Mods</h3>
+                <p>Ovde mozete da instalirate razne modpackove za vas server. Modpack dolazi sa spremljenim pluginima za instaliranje i igranje bez neke vece konfiguracije.</p>
+            </div>
+            
+        </div>
+        <div class="mods-main">
+
+            {% for mod in mods %}
+            <div class="mods-overview">
+                <img class="mod-slika" src="{{ mod.img.url }}" data-original-src="{{ mod.img.url }}"
+                    onmouseover="promeniSrc(this)" onmouseout="resetujSrc(this)">
+                <p class="mod-label">{{ mod.label }}</p>
+                <p class="mod-name">{{ mod.name }}</p>
+                <div class="install-mod" onmouseover="promeniSrcZaInstallLink(this)" onmouseout="resetujSrcZaInstallLink(this)">
+                    {% if mod == server.mod %}
+                        <a class="install-link-disabled">
+                            Mod {{ server.mod }} je vec instaliran.
+                        </a>
+                    {% else %}
+                        <a href="{% url 'cs-overview' server.id %}" class="install-link" onclick="openModal()" data-mod-name="{{ mod.name }}">
+                            Instaliraj Mod
+                        </a>
+                    {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+        
+            
+        </div>
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div id="confirmationModal" class="modal">
+    <div class="modal-content">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <p>Da li ste sigurni da želite instalirati ovaj mod?</p>
+        <p>Ako jeste, vas server ce biti obrisan i ponovo kreiran sa novim modom bez starih fajlova. <br>Nemojte pokušavati pokrenuti server sledećih 3-4 minuta da ne bi došlo do greške.</p>
+        <button id="confirmInstallBtn" onclick="confirmInstall()">Instaliraj</button>
+    </div>
+</div>
+
+<script src="{% static 'js/cs.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.install-link').click(function (e) {
+            e.preventDefault();
+
+            // Prikaži modal
+            openModal();
+
+            // Postavi vrednost modName
+            var modName = $(this).data('mod-name');
+            console.log(modName);
+
+            // Postavi vrednost serverId
+            var serverId = parseInt("{{ server.id }}", 10);
+
+            // Kada korisnik pritisne "Instaliraj" u modalu
+            $('#confirmInstallBtn').click(function () {
+                $.ajax({
+                    type: 'GET',
+                    url: `/update_server_mod/${serverId}/`,
+                    data: {'mod_name': modName},
+                    success: function (response) {
+                        console.log(response);
+                        // Ažurirajte sučelje prema potrebi
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+
+                // Sakrij modal
+                closeModal();
+            });
+        });
+    });
+
+    // JavaScript funkcije za rad sa modalom
+    function openModal() {
+        var modal = document.getElementById('confirmationModal');
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('confirmationModal');
+        modal.style.display = 'none';
+    }
+
+    // Zatvaranje moda ako korisnik klikne van moda
+    window.onclick = function (event) {
+        var modal = document.getElementById('confirmationModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    };
+</script>
+
+
+  
+<script>
+    function promeniSrc(imgElement) {
+        imgElement.src = '';  // Postavite praznu vrednost za src
+
+        // Dodajte druge promene ili akcije po potrebi
+    }
+    
+    function resetujSrc(imgElement) {
+        imgElement.src = imgElement.getAttribute('data-original-src');  // Koristite originalnu vrednost za src
+
+        // Dodajte druge promene ili akcije po potrebi
+    }
+    
+    function promeniSrcZaInstallLink(installLink) {
+        var modSlika = installLink.parentElement.querySelector('.mod-slika');
+        promeniSrc(modSlika);
+    }
+
+    function resetujSrcZaInstallLink(installLink) {
+        var modSlika = installLink.parentElement.querySelector('.mod-slika');
+        resetujSrc(modSlika);
+    }
+    </script>
+
+
+
+
+
+</body>
+</html>

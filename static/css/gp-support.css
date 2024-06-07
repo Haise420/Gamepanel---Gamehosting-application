@@ -1,0 +1,1113 @@
+@font-face {
+    font-family: 'CodecColdTrialBold';
+    src: url('/static/fonts/source-sans-pro.black.ttf') format('truetype');
+    /* Dodatne varijacije fonta ako su dostupne (npr. bold, italic) */
+}
+
+
+html, body{
+    background: #2e0558;
+    height: 100%;
+    overflow-y: hidden;
+    background-image: url(/static/images/sg-bg.png);
+    background-size: cover;
+    font-family: 'CodecColdTrialBold', sans-serif;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+}
+
+.wrapper-bg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.wrapper{
+    grid-template: 'main main main main user'
+                    'main main main main sidebar'
+                    'main main main main sidebar';
+    display: grid;
+    justify-content: center;
+    max-width: 100%;
+    padding: 15px;
+    position: relative;
+    gap: 25px;
+    margin-right: 122px;
+    
+}
+.wrapperlogin{
+    grid-template: 'mainlogin mainlogin mainimg mainimg'
+                    'mainlogin mainlogin mainimg mainimg';
+    display: grid;
+    justify-content: center;
+    padding: 15px;
+    max-width: 100%;
+    height: 600px;
+    gap: 0.5px;
+}
+
+.main{
+    grid-area: main;
+    grid-template: 'support-header support-header support-header support-header-button'
+                    'support-content support-content support-content support-chats'
+                    'support-content support-content support-content support-chats';
+    width: 1200px;
+    display: grid;
+    height: 800px;
+    position: relative;
+    overflow:hidden;
+    padding: 25px;
+    -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+    -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+    box-shadow: 0px 0px 20px 0px #aa00ff;
+    gap: 15px;
+    border-radius: 15px;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+    border: 1px solid #aa00ff;
+
+}
+
+
+@keyframes example {
+    0%   {box-shadow: 15px 0px 95px 10px #aa00ff;}
+    10%  {box-shadow: 25px 15px 95px 25px #aa00ff}
+    30%  {box-shadow: 15px 25px 95px 35px #aa00ff}
+    50%  {box-shadow: -25px -25px 95px 35px #aa00ff}
+    70% {box-shadow: -15px -15px 95px 35px #aa00ff}
+    100%   {box-shadow: 0px 0px 95px 20px #aa00ff}
+  }
+
+
+  @keyframes example2 {
+    0%   {box-shadow: inset 2px 0px 10px 1px #aa00ff;}
+    10%  {box-shadow: inset 2px 2px 15px 1px #aa00ff}
+    30%  {box-shadow: inset 2px 2px 10px 1px #aa00ff}
+    50%  {box-shadow: inset -3px -3px 5px 1px #aa00ff}
+    70% {box-shadow: inset -4px -4px 5px 1px #aa00ff}
+    100%   {box-shadow: inset 0px 3px 10px 1px #aa00ff}
+  }
+
+
+
+.support-header{
+    display: flex;
+    grid-area: support-header;
+    width: 70%;
+    color: white;
+    gap: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    height: 150px;
+    padding: 15px;
+    border: 1px solid #aa00ff;
+    border-top-right-radius: 100px;
+    border-bottom-right-radius: 100px;
+    animation-name: example2;
+    animation-duration: 60s;
+    animation-iteration-count:infinite;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+}
+
+.support-header-button{
+    grid-area: support-header-button;
+    display: flex;
+    width: 90%;
+    height: 150px;
+    padding: 15px;
+    left: -340;
+    position: relative;
+    top: 35;
+}
+
+.support-content{
+    
+    position: relative;
+    border: 1px solid #aa00ff;
+    width: 900px;
+    height: 600px;
+    display: grid;
+    gap: 15px;
+    grid-template: 'chat chat'
+                'chatcommands chatcommands';
+                -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+                -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+                box-shadow: 0px 0px 20px 0px #aa00ff;
+}
+
+.support-chats{
+    animation-name: example2;
+    animation-duration: 60s;
+    animation-iteration-count:infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+    width: 280px;
+    height: 600px;
+    position: relative;
+    display: grid;
+    grid-template-rows: repeat(auto-fill, 110px);
+    gap: 5px;
+    border: 1px solid #aa00ff;
+    top: 0;
+}
+
+.chat{
+    display: grid;
+    grid-area: chat;
+    width: 100%;
+    height: 165%;
+    top: 0;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    position: absolute;
+    border: 1px solid #aa00ff;
+    gap: 5px;
+}
+
+.chat::-webkit-scrollbar {
+    margin-right: 5px;
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .chat::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    margin-right: 5px;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .chat::-webkit-scrollbar-track {
+    background-color: #310447;
+    margin-right: 5px;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px; /* Boja tragača (tragača pozadine) */
+
+  }
+
+.chatcommands{
+    display: grid;
+    grid-area: chatcommands;
+    grid-template: 'chatinput sendticket'
+                    'chatinput sendticket';
+    width: 900px;
+    height: 90px;
+    bottom: 0;
+    position: absolute;
+}
+.chatinput{
+    grid-area: chatinput;
+    width: 160%;
+    height: 75%;
+    border: 1px solid #aa00ff;
+    background: linear-gradient(270deg, rgba(57,32,203,1) 0%, rgba(21,13,131,0.5634454465379901) 100%);
+    color: white;
+    font-size: 15px;
+    background: none;
+    position: absolute;
+    left: 7;
+    padding: 15px;
+    text-shadow: 0px 2px rgb(186, 31, 186);
+
+}
+.chatinput:focus{
+    background-color: none;
+    border: 1px solid white;
+    outline:none;
+}
+
+
+.chatinput::placeholder{
+    color: white;
+    text-shadow: 0px 2px rgb(186, 31, 186);
+    font-weight: bold;
+    font-size: 17px;
+    opacity: 1;
+}
+
+.sendticket{
+    grid-area: sendticket;
+    width: 50%;
+    position: absolute;
+    left: 285;
+    height: 50px;
+}
+
+.send{
+    width: 60px;
+}
+
+.sendticket-btn{
+    width: 70%;
+    height: 67px;
+    border-radius: 7px;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+    font-size: 23px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    color: white;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    transition: 0.15s ease;
+    cursor: pointer;
+}
+
+.sendticket-btn:hover{
+    scale: 0.9;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+}
+
+.vrsta-tiketa{
+    position: absolute;
+    left: 300;
+    width: 300px;
+    height: 50px;
+    border-radius: 60px;
+    text-align: center;
+    background: none;
+    color: white;
+    font-size: 20px;
+    font-weight: 600;
+}
+option{
+    color: rgb(255, 255, 255);
+    background-color: #140679;
+    height: 100%;
+}
+
+
+.chatoptions{
+    grid-area: chatoptions;
+    border-top: 1px solid #aa00ff;
+    color: white;
+    padding: 20px;
+    display: flex;
+    align-self: center;
+    gap: 15px;
+    
+}
+
+.choose-ticket-text{
+    font-size: 26px;
+    font-weight: 900;
+    height: 30px;
+    position: relative;
+    bottom: -15;
+    text-shadow: 2px 0px rgb(181, 13, 41);
+}
+
+
+.chat-sender{
+    border-bottom: 1px solid #aa00ff;
+    height: 150px;
+    width: 100%;
+    background: linear-gradient(270deg, rgba(105,7,166,0.6054796918767507) 0%, rgba(42,3,80,1) 100%);
+    display: flex;
+    color: white;
+    position: relative;
+}
+
+.sender-icon{
+    width: 100px;
+    height: 100px;
+    border: 1px solid #aa00ff;
+    border-radius: 100px;
+    position: absolute;
+    right: 20;
+    top: 20;
+    background-image: url('user-slika.png');
+}
+
+.user-icon{
+    width: 80px;
+    height: 80px;
+}
+
+.ticket-naslov{
+    margin: 0;
+    margin-left: 5px;
+
+}
+.ticket-deskripcija{
+    margin: 0;
+    margin-left: 5px;
+    word-break: break-all;
+    width: 95%;
+
+}
+.ticket-status-text{
+    margin: 0;
+    margin-left: 5px;
+
+}
+
+.ticket-info-img{
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    align-self: start;
+    margin-top: 10px;
+    border: 1px solid white;
+    border-radius: 140px;
+    height: 100px;
+    width: 100px;
+}
+
+.ticket-message-img{
+    display: grid;
+    place-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    border: 1px solid white;
+    border-radius: 140px;
+    height: 100px;
+    width: 100px;
+}
+
+.ticket-info-text{
+    margin-top: 25px;
+    align-self: start;
+    width: 80%;
+    min-height: 150px;
+}
+
+.chat-greet{
+    margin-left: 20px;
+    color: white;
+}
+
+.message{
+    background: linear-gradient(90deg, rgba(105,7,166,0.8071603641456583) 0%, rgba(42,3,80,1) 100%);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    color: white;
+}
+
+.message-content{
+    word-break: break-all;
+    width: 85%;
+}
+
+.ticket-info{
+    color: white;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    background: linear-gradient(90deg, rgba(105,7,166,0.8071603641456583) 0%, rgba(42,3,80,1) 100%);
+    border-bottom: 5px solid #aa00ff;
+}
+
+.sender-text{
+    color: white;
+    width: 700px;
+    height: 30%;
+    text-align: end;
+    align-self: center;
+    position: absolute;
+    left: 0;
+    font-size: 25px;
+}
+
+.chat-reciever{
+    margin-top: -100px;
+    border: 1px solid #aa00ff;
+    height: 150px;
+    width: 100%;
+    background: linear-gradient(90deg, rgba(105,7,166,0.8071603641456583) 0%, rgba(42,3,80,1) 100%);
+    display: flex;
+    color: white;
+    position: relative;
+}
+
+.noticketfound{
+    text-align: center;
+    color: white;
+}
+
+.reciever-icon{
+
+    width: 100px;
+    height: 100px;
+    border: 1px solid #aa00ff;
+    border-radius: 100px;
+    position: absolute;
+    left: 20;
+    top: 20;
+    background-image: url('user.png');
+    background-size: cover;
+}
+
+.reciever-text{
+    color: white;
+    width: 700px;
+    height: 30%;
+    text-align: start;
+    align-self: center;
+    position: absolute;
+    left: 200;
+    font-size: 25px;
+}
+
+.rcv-icon{
+    width: 100px;
+    height: 100px;
+}
+
+.snd-icon{
+    width: 100px;
+    height: 100px;
+}
+
+.ticket-card{
+    width: 100%;
+    background-color: #582bf7;
+    height: 100px;
+    left: 0;
+    top: 0;
+    transition: 0.2s ease-in;
+}
+
+.ticket-card:hover{
+    background-color: #aa00ff;
+    cursor: pointer;
+}
+
+.ticket-icon{
+    width: 80px;
+    height: 80px;
+    border: 1px solid white;
+    border-radius: 100px;
+    right: -190;
+    position: relative;
+    z-index: 2;
+    margin-top: 10px;
+    background-image: url('user-slika.png');
+    background-position: center;
+    background-size: cover;
+    background-color: #2d1cb2;
+}
+.ticket-subject{
+    position: relative;
+    align-self: center;
+    color: white;
+    top: -90px;
+    font-size: 25px;
+    width: 150px;
+    height: 63px;
+    background-color: rgb(58, 11, 214);
+    left: 40;
+    box-shadow: 13px 0px rgb(134, 49, 63);
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.ticket-subject p{
+    font-size: 17px;
+    position: relative;
+    top: 7px;
+    width: 150px;
+    overflow: hidden;
+    text-shadow: 4px -1px rgb(152, 9, 255);
+    margin-bottom: 0;
+    height: 22px;
+}
+
+.ticket-subject-label{
+    margin: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.usernameicon{  
+    position: absolute;
+    width: 35px;
+    top: 2;
+    left: 0;
+    margin-left: -40px;
+}
+.passwordicon{
+    position: absolute;
+    width: 35px;
+    top: 52;
+    left: 0;
+    margin-left: -40px;
+}
+.repasswordicon{
+    position: absolute;
+    width: 35px;
+    top: 102;
+    left: 0;
+    margin-left: -40px;
+}
+.emailicon{
+    position: absolute;
+    width: 35px;
+    top: 152;
+    left: 0;
+    margin-left: -40px;
+}
+.mainlogin{
+    grid-area: mainlogin;
+    border: 1px solid black;
+    display: grid;
+    justify-content: center;
+    width: 500px;
+    position: relative;
+    
+
+}
+.mainimg{
+    grid-area: mainimg;
+    border: 1px solid black;
+    width: 500px;
+}
+.slika{
+    width: 500px;
+    height: 100%;
+}
+.loginunos{
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(198, 198, 255);
+
+}
+.registerunos{
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(198, 198, 255);
+}
+.unosclass{
+    display: grid;
+    height: 100px;
+    width: 220px;
+    position: relative;
+    top: 150px;
+}
+.registerclass{
+    display: grid;
+    height: 200px;
+    width: 220px;
+    position: relative;
+    top: 150px;
+}
+.logindugme{
+    height: 65px;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-top: 150px;
+    background-color: rgb(46, 46, 255);
+    font-size: 20px;
+    font-weight: 800;
+    color: aliceblue;
+
+}
+.logindugme:hover{
+    background-color: rgb(0, 0, 255);
+    transition: background-color 0.4s ease-in;
+    border: 1px solid white;
+}
+.napravinalog{
+    text-decoration: none;
+    color: black;
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;  
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    padding: 5px;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+}
+.napravinalog:hover{
+    color: aliceblue;
+    
+}
+
+.sidebar{
+    grid-area: sidebar;
+    width: 100px;
+    display: grid;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+    height: 400px;
+    border: 1px solid #aa00ff;
+    align-self: center;
+    border-radius: 200px;
+    justify-content: center;
+    position: absolute;
+    margin-top: -170px;
+    -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+    -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+    box-shadow: 0px 0px 20px 0px #aa00ff;
+    transition: box-shadow 0.3s ease-in;
+
+}
+
+
+.informacije{
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: aliceblue;
+}
+.info-text{
+    padding: 35px;
+    text-align: center;
+    font-size: 30px;
+}
+
+
+
+.sidebar-link{
+    align-self: center;
+    cursor: pointer;
+    background: none;
+    border-radius: 145px;
+    transition: box-shadow 0.5s ease-in-out;
+  
+
+}
+.sidebar-link:hover{
+    -webkit-box-shadow: 0px 0px 25px 5px rgba(255,255,255,0.15);
+    -moz-box-shadow: 0px 0px 25px 5px rgba(255,255,255,0.15);
+    box-shadow: 0px 0px 25px 5px rgba(255,255,255,0.15);
+    
+}
+
+.sidebar-img-home{
+    width: 65px;
+    transition: 0.2s ease-out;
+
+}
+.sidebar-img-home:hover{
+    transform: scale(1.1);
+
+}
+
+.sidebar-img-servers{
+    width: 65px;
+    transition: 0.1s ease-out;
+
+}
+.sidebar-img-servers:hover{
+    transform: scale(1.1);
+
+}
+
+.sidebar-img-support{
+    width: 65px;
+    transition: 0.2s ease-out;
+
+}
+.sidebar-img-support:hover{
+    transform: scale(1.1);
+
+}
+
+.slider-info{
+    grid-area: slider-info;
+    width: 100%;
+    height: 650px;
+}
+
+.sidebar-what{
+    color: white;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    position: absolute;
+    right: -31;
+    width: 30px;
+}
+.sidebar-what-content{
+    align-self: center;
+    border-radius: 15px;
+    justify-content: center;
+    height: 170px;
+    width: 25px;
+    border: 1px solid #aa00ff;
+    background-color: #aa00ff;
+}
+
+.side-what-text{
+    margin-top: 17px;
+    margin-right: 5px;
+    text-shadow: 3px 0px blueviolet;
+}
+
+.main-updates{
+    grid-area: main-updates;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(0, 55, 255);
+    border-top-left-radius: 55px;
+    border-bottom-left-radius: 55px;
+}
+
+.main-info{
+    grid-area: main-info;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(0, 55, 255);
+    justify-content: center;
+    display: flex;
+    border-top-right-radius: 55px;
+    border-bottom-right-radius: 55px;
+}
+.updates{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 45px;
+    background: linear-gradient(270deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 100%);
+    text-shadow: 4px 4px #582bf7;
+    cursor: pointer;
+    border-top-left-radius: 55px;
+    border-bottom-left-radius: 55px;
+    font-weight: 600;
+    transition: 0.3s ease-in;
+
+}
+
+.updates:hover{
+    background: linear-gradient(270deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 60%);
+    
+    color: white;
+    font-weight: 900;
+}
+
+
+.informacije-button{
+    width: 100%;
+    height: 100%;
+    font-size: 45px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border-top-right-radius: 55px;
+    border-bottom-right-radius: 55px;
+    font-weight: 600;
+    background: linear-gradient(90deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 100%);
+    text-shadow: 4px 4px #582bf7;
+    transition: 0.3s ease-in-out;
+}
+
+.informacije-button:hover{
+    background: linear-gradient(90deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 60%);
+    color: white;
+    font-weight: 900;
+    
+}
+.informacije-text{
+    margin-top: 20px;
+    margin-left: -15px;
+    color: white;
+}
+
+.slider-info-img{
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.sidebar-img-user{
+    width: 65px;
+}
+
+.sidebar-img-user:hover{
+    height: 70px;
+    transition: height 0.3s ease-in;
+}
+
+.user{
+    grid-area: user;
+    width: 100px;
+    border: 1px solid #aa00ff;
+    height: 250px;
+    position: absolute;
+    z-index: 1;
+    border-radius: 200px;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+    -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+    -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+    box-shadow: 0px 0px 20px 0px #aa00ff;
+    justify-content: center;
+    display: grid;
+    grid-template: 'user-img'
+                    'user-info';
+    justify-items: center;
+    transition: box-shadow 0.2s ease-in;    
+
+}
+
+
+.user-img{
+    overflow: hidden;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    position: absolute;
+    top: 25;
+    grid-area: user-img;
+    border: 1px solid #aa00ff;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+}
+
+.user-info{
+    grid-area: user-info;
+}
+
+.user-username{
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.user-balance{
+    justify-content: center;
+    display: flex;
+    width: 70px;
+    text-align: center;
+    bottom: 85;
+    left: 15;
+    color: white;
+    position: absolute;
+    background-color: rgb(87 87 241);
+    border-radius: 35px;
+}
+
+.dolar{
+    color: white;
+    transition: 0.3s ease-out;
+}
+
+.user:hover .dolar{
+    color: rgb(18, 236, 18);
+    text-shadow: 2px 0px rgb(108, 255, 108);
+
+}
+
+.user-logout{
+    width: 100px;
+    text-align: center;
+    bottom: 30;
+    left: 0;
+    color: white;
+    position: absolute;
+    transition: 0.3s ease-in;
+
+}
+.logout{
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+
+.user-logout:hover{
+    border-radius: 35px;
+    background-color: rgb(63, 63, 245);
+    width: 80%;
+    left: 10px;
+    cursor: pointer;
+}
+
+.user-slika{
+    width: 70px;
+}
+
+.server{
+    background-color: rgb(9, 72, 232);
+    border-radius: 35px;
+    border: 1px solid white;
+    transition: 0.1s ease-in-out;
+}
+.server:hover{
+    overflow: hidden;
+    box-shadow: 0px 0px 75px 0px rgb(55, 41, 113);
+    border: 7px solid white;
+}
+.csgo-img{
+    border-radius: 35px;
+    width: 100%;
+    height: 100%;
+}
+
+.support-img{
+    width: 150px;
+    height: 150px;
+}
+
+
+.ticket-btn{
+    width: 300px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 35px;
+    cursor: pointer;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    transition: 0.1s ease-in-out;
+    border: 1px solid #aa00ff;
+    animation-name: example2;
+    animation-duration: 60s;
+    animation-iteration-count:infinite;
+}
+
+.ticket-btn:hover{
+    scale: 0.9;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    text-shadow: 2px 2px #aa00ff;
+}
+
+
+.create-ticket-modal {
+    color: white;
+    display: none;
+    position: fixed;
+    min-width: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    padding: 20px;
+    border: 1px solid #aa00ff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 400px; /* Prilagodite maksimalnu širinu prema potrebi */
+}
+
+.create-ticket-modal h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+}
+
+.create-ticket-modal label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.create-ticket-modal input,
+.create-ticket-modal textarea,
+.create-ticket-modal select {
+    border: none;
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    background-color: #aa00ff;
+    color: white;
+}
+
+.create-ticket-modal button {
+    width: 100%;
+    transition: 0.2s ease-in-out;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    transition: 0.1s ease-in-out;
+    border: 1px solid #aa00ff;
+    animation-name: example2;
+    animation-duration: 60s;
+    animation-iteration-count: infinite;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#label option{
+    background-color: #582bf7;
+}
+
+#game option{
+    background-color: #582bf7;
+}
+
+#description{
+    max-width: 400px;
+}
+
+.create-ticket-modal button:hover {
+    color: #aa00ff;
+}
+
+@media only screen and (max-width: 1024px) {
+
+
+    .wrapper{
+        scale: 0.7;
+    }
+
+    .main{
+        margin-left: 90px;
+    }
+    }
+
+
+@media only screen and (max-width: 768px) {
+    .main{
+      scale: 0.5;
+      margin-left: 150px;
+    }
+  
+    .sidebar{
+      grid-area: unset;
+      transform: rotate(-90deg);
+      justify-self: center;
+      margin-top: 550px;
+      scale: 0.7;
+  }
+    
+  
+    .sidebar-link{
+      transform: rotate(90deg);
+    }
+  }

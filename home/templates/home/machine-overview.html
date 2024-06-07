@@ -1,0 +1,17 @@
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[SG:GP]</title>
+    <link rel="stylesheet" href="">
+</head>
+<body>
+    <h1>Detalji mašine: {{ machine.name }}</h1>
+    <p>Vlasnik: {{ machine.owner }}</p>
+    <p>IP adresa: {{ machine.ip_address }}</p>
+    <p>Korisničko ime za SSH: {{ machine.ssh_username }}</p>
+    <p>Port za SSH: {{ machine.ssh_port }}</p>
+    <p>Status: {{ machine.is_active }}</p>
+    <p>Datum kreiranja: {{ machine.created_at }}</p>
+</body>
+</html>

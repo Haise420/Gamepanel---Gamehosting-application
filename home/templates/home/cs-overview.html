@@ -1,0 +1,425 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="stylesheet" href="{% static 'css/main.scss' %}" class="scss">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Overview</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">420 <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+
+                <div class="content">
+                    
+                    <div class="overview-content">
+                        <div class="server-info">
+                            <div class="image-block">
+                                <img src="{% static 'images/servers-cs.png' %}" class="server-img">
+                            </div>
+                            
+                            <div class="server-info-content">
+                                <div class="server-name">
+                                    <div class="name-label">
+                                        <img class="cs-icon" src="{% static 'images/cs-icon.png' %}" alt="">
+                                        <p class="server-hostname">{{ server.label }}</p>
+                                        <a href="{% url 'cs_configure' server.id %}">
+                                            <img class="change-name" src="{% static 'images/settings.png' %}" alt="">
+                                        </a>
+                                        
+                                    </div>
+
+                                    
+                                    
+                                    <div class="server-controls">
+                                        {% if status == "Online" %}
+                                        <div class="restart-button" id="restartujServerButton()" data-url="{% url 'restartuj_server' server.id %}" data-status="{{ status }}" hover-tooltip="Tooltip on the bottom">
+                                            <img class="restartovanje-button" src="{% static 'images/re-power.png' %}" alt="" >
+                                        </div>
+
+                                        <div class="shutdown-button" id="stopirajServerButton()" data-url="{% url 'stopiraj_server' server.id %}">
+                                            <img class="gasenje-button" src="{% static 'images/power-off.png' %}" alt="" hover-tooltip="Tooltip on the bottom" tooltip-position="bottom">
+                                        </div>
+                                    {% elif status == "Offline" %}
+                                        <div class="start-button" id="pokreniServerButton()" data-url="{% url 'pokreni_server' server.id %}" data-status="{{ status }}">
+                                            <img class="startovanje-button" src="{% static 'images/power-on.png' %}" alt="" hover-tooltip="Tooltip on the bottom">
+                                        </div>
+                                    {% endif %}
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+
+                                <div class="server-graph"><br>
+                                    <div class="server-information">
+                                       <div class="status-colors">Server Status: <p class="{% if status == 'Online' %}status-online{% else %}status-offline{% endif %}">{{ status }}</p></div> 
+                                        Server Players: {{ player_count }} / {{ server.max_players }}<br>
+                                        Current Map: {{ current_map }} <br>
+                                        Server Mod: {{ server.mod.label}}<br>
+                                        IP Address: {{ server.ip_address }}:{{ server.port }}<br><br><br>
+                                        SGTracker Global Position: 1#<br>
+                                        SGTracker Country Position: 1# 
+
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <div class="ftp-login">
+                                <div class="ftp-label">
+                                    <p class="ftp-login-naslov">FTP Login</p>
+                                </div>
+                                
+                                <div class="ftp-cred" onclick="toggleFtpInfo()">
+
+                                    <img id="ftpLock" class="ftp-lock" src="{% static 'images/lock.png' %}" alt="">
+                                
+                                    <div id="ftpInfo" class="ftp-info" style="display: none;">
+                                        Hostname: ftp.soldiergang.com <br>
+                                        Username: {{ ftp_user }} <br>
+
+                                        Password: {{ ftp_user_password }} 
+ 
+                                        <br>
+                                        Port: 21
+                                    </div>
+                                    
+                                    
+                                    
+                                
+                                </div>
+                                
+                            </div>
+    
+                        </div>
+                        <hr>
+
+                        <div class="server-controls-advanced">
+                            <a href="{% url 'cs-overview' server.id %}" class="refresh"><img class="refresh-button" src="{% static 'images/refresh.png' %}" alt=""></a>
+                            <div class="controls-separator"></div>
+                            <p class="shortcut-label">Shortcuts →</p>
+                            <a class="shortcut-name" href="{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/server.cfg/">server.cfg</a>
+                           
+                            <a class="shortcut-name" href="{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/users.ini/" onclick="openEditAdmins()">users.ini</a>
+                            
+                            <a class="shortcut-name" href="{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/plugins.ini/">plugins.ini</a>
+                            <div class="controls-separator"></div>
+                            <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/">cstrike</a>
+
+                            
+                            <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/models/">models</a>
+                            
+                            <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/maps/">maps</a>
+                            
+                            <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/sound/">sounds</a>
+                            
+                            <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/addons/amxmodx/configs/">configs</a>
+                            <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/addons/amxmodx/plugins/">plugins</a>
+                            <div class="controls-separator"></div>
+                            <a href="{% url 'cs_configure' server.id %}" class="shortcut-settings">Configure Server</a>
+
+                        </div>
+
+<hr style="margin-top: 8px;">
+
+
+
+                        <div class="playerlist">
+                            {% if players %}
+                            <div class="player-tab">
+                              <table class="player-table">
+                                <tr>
+                                  <th><p class="player-name-label">Nickname</p></th>
+                                  <th><p class="player-steamid-label">Score</p></th>
+                                  <th><p class="player-steamid-label">Time</p></th>
+                                  <th><p class="player-control-label">Manage players</p></th>
+                                </tr>
+                                {% for player in players %}
+                                  <tr>
+                                    <td><p class="player-name">{{ player.name }}</p></td>
+                                    <td><p class="player-steamid">{{ player.score }}</p></td>
+                                    <td><p class="player-steamid">{{ player.duration_minutes }} min {{ player.duration_seconds }} sec</p></td>
+                                    <td class="manage-players">
+                                      <a class="player-makeadmin">Set Admin</a>
+                                      <a class="player-kick">Kick Player</a>
+                                      <a class="player-ban">Ban Player</a>
+                                    </td>
+                                  </tr>
+                                {% endfor %}
+                              </table>
+                            </div>
+                          {% else %}
+                            <p>There is no players online.</p>
+                          {% endif %}
+
+                            
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+    
+            <div class="sidebar">
+
+                 <div class="sidebar-link" data-hover-text="Home">
+                    <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Servers">
+                    <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Support">
+                    <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="User Panel">
+                    <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    <div id="snackbar">
+        <div class="snackbar-content">
+        <img class="snackbar-icon" src="{% static 'images/logo.png' %}" alt="">
+        <p>Uspesno ste pokrenuli Vas server..</p>
+        </div>
+        
+    </div>
+    <div id="snackbar-stop">
+        <div class="snackbar-content">
+            <img class="snackbar-icon" src="{% static 'images/logo.png' %}" alt="">
+            <p>Uspesno ste stopirali Vas server..</p>
+            </div>
+    </div>
+
+    <div id="snackbar-restart">
+        <div class="snackbar-content">
+            <img class="snackbar-icon" src="{% static 'images/logo.png' %}" alt="">
+            <p>Uspesno ste restartovali Vas server..</p>
+            </div>
+    </div>
+    
+    
+    <script src="{% static 'js/cs.js' %}"></script>
+
+    <script>
+        function prikaziSnackbarStart() {
+    var snackbar = document.getElementById("snackbar");
+    snackbar.style.display = "block";
+    setTimeout(function() {
+        snackbar.style.display = "none";
+    }, 3000); // Prikazuje snackbar 3 sekunde, možete prilagoditi vreme prema potrebama
+}
+
+function prikaziSnackbarRestart() {
+    var snackbar = document.getElementById("snackbar-restart");
+    snackbar.style.display = "block";
+    setTimeout(function() {
+        snackbar.style.display = "none";
+    }, 3000); // Prikazuje snackbar 3 sekunde, možete prilagoditi vreme prema potrebama
+}
+
+
+function prikaziSnackbarStop() {
+    var snackbarstop = document.getElementById("snackbar-stop");
+    snackbarstop.style.display = "block";
+    setTimeout(function() {
+        snackbarstop.style.display = "none";
+    }, 3000); // Prikazuje snackbar 3 sekunde, možete prilagoditi vreme prema potrebama
+}
+    </script>
+
+    <script>
+        function toggleFtpInfo() {
+            var lockElement = document.getElementById('ftpLock');
+            var infoElement = document.getElementById('ftpInfo');
+        
+            // Ako je trenutni prikaz lock-a, promeni ga na none i info na block, i obrnuto
+            if (lockElement.style.display !== 'none') {
+                lockElement.style.display = 'none';
+                infoElement.style.display = 'block';
+            } else {
+                infoElement.style.display = 'block';
+            }
+        }
+        </script>
+    
+
+    <script>
+        window.onload = function () {
+            // Resetuj sessionStorage nakon svakog osvežavanja stranice
+            sessionStorage.removeItem('startButtonClicked');
+    
+            // Postavi click event na dugme nakon osvežavanja
+            document.querySelector('.start-button').addEventListener('click', async function(event) {
+                event.preventDefault();
+    
+                var buttonElement = event.currentTarget;
+                var apiUrl = buttonElement.getAttribute('data-url');
+                var hasBeenClicked = sessionStorage.getItem('startButtonClicked');
+    
+                // Proveri trenutni status servera
+                var status = buttonElement.getAttribute('data-status');
+    
+                if (status === 'Offline' && !hasBeenClicked) {
+                    // Ako je status "Offline" i dugme nije već kliknuto, postavi promenljivu da je kliknuto
+                    sessionStorage.setItem('startButtonClicked', 'true');
+    
+                    // Onemogući dugme
+                    buttonElement.setAttribute('disabled', 'true');
+    
+                    // Izvrši AJAX poziv
+                    try {
+                        const response = await fetch(apiUrl, {
+                            method: 'GET',
+                            headers: {
+                                'Content-Type': 'application/json',
+                            },
+                        });
+    
+                        if (response.ok) {
+                            // Osveži stranicu nakon što dobijemo odgovor od API-ja
+                            setTimeout(function() {
+                                // Osveži stranicu nakon 5 sekundi
+                                location.reload();
+                            }, 5000);
+                            prikaziSnackbarStart();
+                        } else {
+                            console.error('Neuspešan AJAX poziv');
+                        }
+                    } catch (error) {
+                        console.error('Greška prilikom izvršavanja AJAX poziva', error);
+                    } finally {
+                        // Omogući dugme nakon završetka AJAX poziva
+                        buttonElement.removeAttribute('disabled');
+                    }
+                }
+            });
+        };
+    </script>
+    
+    
+
+
+<script>
+    document.querySelector('.shutdown-button').addEventListener('click', function(event) {
+        event.preventDefault();  // Spriječi uobičajeno ponašanje klika
+
+        var divElement = event.currentTarget;
+        var apiUrl = divElement.getAttribute('data-url');
+        prikaziSnackbarStop();
+
+        // AJAX poziv ka API URL-u
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', apiUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                // Osveži stranicu nakon što dobijemo odgovor od API-ja
+                setTimeout(function() {
+                    // Osveži stranicu nakon 5 sekundi
+                    location.reload();
+                    
+                }, 50);
+            }
+        };
+        
+        // Pošalji prazan JSON objekat jer tvoj API view očekuje POST podatke
+        xhr.send(JSON.stringify({}));
+    });
+</script>
+
+
+<script>
+    document.querySelector('.restart-button').addEventListener('click', function(event) {
+        event.preventDefault();  // Spriječi uobičajeno ponašanje klika
+
+        var divElement = event.currentTarget;
+        var apiUrl = divElement.getAttribute('data-url');
+        prikaziSnackbarRestart();
+
+        // AJAX poziv ka API URL-u
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', apiUrl, true);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4) {
+                // Osveži stranicu nakon što dobijemo odgovor od API-ja
+                setTimeout(function() {
+                    // Osveži stranicu nakon 5 sekundi
+                    location.reload();
+                    
+                }, 3000);
+            }
+        };
+        
+        // Pošalji prazan JSON objekat jer tvoj API view očekuje POST podatke
+        xhr.send(JSON.stringify({}));
+    });
+</script>
+
+
+
+
+
+</body>
+</html>

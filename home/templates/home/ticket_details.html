@@ -1,0 +1,281 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/gp-support.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Support</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ customer }}
+                    </div>
+                    <div class="user-balance">{{ customer.balance }} <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                
+                <div class="support-header">
+                    <img class="support-img" src="{% static 'images/support.png' %}">
+                    <div class="support-header-info">
+                        <h2>Support / Tiketi</h2>
+                    <p>Ovde mozete da postavljate tikete sa vasim pitanjima nakon cega ce Vam Support Team odgovoriti u roku od 5min - 2h i bicete obavesteni putem Vaseg email-a ili notifikacije na websajtu.</p>
+                    </div>
+                    
+                </div>
+                <div class="support-header-button">
+                    <button onclick="openTicketModal()" class="ticket-btn">Novi Tiket</button>
+                </div>
+    
+                <div class="support-content">
+
+
+                    <div class="chat">
+                        <div class="ticket-info">
+                            <div class="ticket-info-img">
+                                <img class="snd-icon" src="{{ request.user.customer.img.url }}" alt="">
+                                {{ticket.created_by}}
+                            </div>
+
+                            <div class="ticket-info-text">
+                                <h3 class="ticket-naslov">Naslov: {{ ticket_subject }}</h3>
+                                <p class="ticket-status-text">Status: {{ ticket_status }}</p>
+                                <p class="ticket-deskripcija">Sadrzaj: {{ ticket_description }}</p>
+                                <p>Pregledan: {{ticket.seen}}</p>
+                            </div>
+                            
+
+                        </div>
+
+                                            {% if ticket_messages %}
+                        {% for message in ticket_messages %}
+                            <div class="message">
+                                <img class="ticket-message-img" src="{{ message.sender.customer.img.url }}" alt="">
+                                <p class="message-content">{{ message.sender.username }} - {{ message.content }}</p>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p style="margin-left: 10px;color: white;">Niko jos nije odgovorio na tiket, molimo vas za strpljenje.</p>
+                    {% endif %}
+
+                        
+                    </div>
+
+
+
+                    <div class="chatcommands">
+                        <input id="messageContent" class="chatinput" placeholder="Unesite Vaše pitanje ovde..." type="text">
+                        <div class="sendticket">
+                            <button id="sendTicketBtn" class="sendticket-btn">
+                                <img class="send" src="{% static 'images/send.png' %}" alt="">
+                            </button>
+                        </div>
+                    </div>
+    
+                </div>
+                <div class="support-chats">
+                    {% if user_tickets %}
+                        {% for ticket in user_tickets %}
+                            <div class="ticket-card" data-ticket-id="{{ ticket.id }}">
+                                <div class="ticket-icon">
+                                    <img class="user-icon" src="{{ ticket.created_by.customer.img.url }}" alt="">
+                                </div>
+                                <div class="ticket-subject">
+                                    <p>{{ ticket.subject }}</p>
+                                    <p class="ticket-subject-label">[{{ ticket.label }}]</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p class="noticketfound">Nemate otvorenih tiketa.</p>
+                    {% endif %}
+                </div>
+                    
+            </div>
+    
+            <div class="sidebar">
+
+                 <div class="sidebar-link" data-hover-text="Home">
+                    <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Servers">
+                    <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Support">
+                    <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="User Panel">
+                    <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+                </div>
+            </div>
+    
+        </div>
+    
+    
+    </div>
+
+
+    <div id="ticketModal" class="create-ticket-modal">
+        <h3>Napravi novi tiket</h3>
+        <form id="ticketForm" method="post" onsubmit="createTicket(event)">
+            {% csrf_token %}
+            <label for="subject">Naslov:</label>
+            <input type="text" id="subject" name="subject" required>
+    
+            <label for="description">Pitanje:</label>
+            <textarea id="description" name="description" rows="4" required></textarea>
+    
+            <label for="label">Oznaka:</label>
+            <select id="label" name="label">
+                <option value="" disabled selected>Odaberi oznaku</option>
+                {% for choice in label_choices %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+    
+            <label for="game">Izaberi igru:</label>
+            <select id="game" name="game">
+                <option class="game-choice" value="">Igra</option>
+                {% for choice in game_choices %}
+                    <option value="{{ choice.0 }}">{{ choice.1 }}</option>
+                {% endfor %}
+            </select>
+    
+            <button type="submit">Kreiraj tiket</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var ticketCards = document.querySelectorAll('.ticket-card');
+        
+            ticketCards.forEach(function(ticketCard) {
+                ticketCard.addEventListener('click', function() {
+                    var ticketId = this.getAttribute('data-ticket-id');
+                    var url = '/gp-support/' + ticketId + '/';
+                    window.location.href = url;
+                });
+            });
+        });
+        </script>
+
+
+<script>
+    $(document).ready(function () {
+        $(".sendticket-btn").on("click", function () {
+            var content = $(".chatinput").val();
+
+            $.ajax({
+                type: "POST",
+                url: "{% url 'ticket_details' ticket.id %}",  // Zamijenite sa pravilnim URL-om
+                data: JSON.stringify({ "content": content }),
+                contentType: "application/json;charset=utf-8",
+                headers: {
+                    "X-CSRFToken": getCSRFToken()
+                },
+                dataType: "json",
+                success: function (response) {
+                    if (response.success) {
+                        // Ažurirajte prikaz poruka ili obavestite korisnika da je poruka uspešno poslata
+                        location.reload();
+                    } else {
+                        // Prikazivanje poruke o neuspelu akciji
+                    }
+                },
+                error: function (error) {
+                    // Prikazivanje poruke o grešci
+                }
+            });
+        });
+    });
+
+    function getCSRFToken() {
+        return document.querySelector('[name=csrfmiddlewaretoken]').value;
+    }
+</script>
+
+
+    <script>
+
+
+
+        function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+function createTicket(event) {
+    event.preventDefault();
+
+    var subject = document.getElementById("subject").value;
+    var description = document.getElementById("description").value;
+    var label = document.getElementById("label").value;
+    var game = document.getElementById("game").value;
+
+    // Ovde treba poslati podatke serveru, koristeći AJAX ili slično
+    // Primer sa fetch API:
+
+    fetch('/gp-support/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCSRFToken(), // Koristite funkciju za dobijanje CSRF tokena
+            // Dodajte bilo koje dodatne zaglavlje koje vam je potrebno
+        },
+        body: JSON.stringify({
+            subject: subject,
+            description: description,
+            label: label,
+            game: game,
+            // Dodajte ostale podatke tiketa ovde
+        }),
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+        // Dodajte bilo koju dodatnu logiku nakon uspešnog kreiranja tiketa
+        closeTicketModal(); // Dodajte ovu liniju za zatvaranje moda
+        location.reload();
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+        // Dodajte logiku za rukovanje greškama
+    });
+}
+    </script>
+
+<script>
+    function openTicketModal() {
+    var ticketModal = document.getElementById("ticketModal");
+    ticketModal.style.display = "block";
+}
+
+function closeTicketModal() {
+        var ticketModal = document.getElementById("ticketModal");
+        ticketModal.style.display = "none";
+    }
+</script>
+
+
+
+    
+
+</body>
+</html>

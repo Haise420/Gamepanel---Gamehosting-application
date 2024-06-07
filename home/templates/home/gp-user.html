@@ -1,0 +1,241 @@
+{% load static%}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/gp-user.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Userpanel</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ customer }}
+                    </div>
+                    <div class="user-balance">{{ customer.balance }} <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="user-content">
+                    <img src="{{ customer.img.url }}" class="user-avatar"> 
+                    <div class="user-stats">
+                        <div class="user-nickname">{{ customer }}</div>
+                        <div class="user-stats-balance">{{ customer.balance }} $</div>
+                        <div class="user-xpbar">Level: {{ customer.level }} - {{ customer.xp }}/420 XP</div>
+                    </div>
+
+
+                </div>
+                <div class="content">
+                    <hr>
+                    <div class="content-nav">
+                        <div class="nav-settings">Settings</div>
+                        <div class="nav-transactions" id="">Transactions</div>
+                         <div class="nav-logs">Logs</div>
+                    </div>
+                    <hr>
+                    <div class="content-main">
+                        <div class="settings-main">
+                            <div class="username-part">
+                                <p class="username-label">Username: {{ customer }}</p>
+                            </div>
+                       
+                            <div class="email-part">
+                                <p class="email-label">Email: {{ customer.email }}</p>
+                                <img class="settings-icon" src="{% static 'images/settings.png' %}" alt="" onclick="openEditModal('email')">
+                            </div>
+
+                            <div class="password-part">
+                                <p class="username-label">Password: ********</p>
+                                <img class="settings-icon" src="{% static 'images/settings.png' %}" alt="" onclick="openEditModal('password')">
+                            </div>
+                            <hr>
+
+                            <div class="avatar-part">
+                                <div class="label-parent">
+                                    <p class="username-label">Avatar  </p>
+                                <img class="settings-icon" src="{% static 'images/settings.png' %}" alt="">
+                                </div>
+                                
+                                <img src="{{ customer.img.url }}" class="avatar-change">
+                            </div>
+                            
+
+                        </div>
+                        <div style="visibility: hidden;" class="transactions-main"></div>
+                        <div style="visibility: hidden;" class="logs-main"></div>
+
+                    </div>
+                </div>
+    
+                    
+            </div>
+    
+            <div class="sidebar">
+
+                 <div class="sidebar-link" data-hover-text="Home">
+                    <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Servers">
+                    <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Support">
+                    <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="User Panel">
+                    <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+                </div>
+            </div>
+    
+        </div>
+    
+    </div>
+    
+
+
+    <div id="customerEditModal" class="modal">
+        {% csrf_token %}
+        <div class="modal-content">
+            <span class="close" onclick="closeCustomerEditModal()">&times;</span>
+            <div class="modal-body">
+                <form id="customerEditForm">
+                    <label id="editFieldLabel" for="editField">Field:</label>
+                    <input type="text" id="editField" placeholder="Unesite novu vrijednost">
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-save" onclick="saveChanges('field')">Sacuvaj promene</button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+    <script>
+var currentEditField; // Declare a variable to store the currently edited field
+
+function openEditModal(field) {
+    console.log("Opening modal for field: " + field);
+
+    // Set the field value to an empty string
+    document.getElementById('editField').value = '';
+
+    // Optionally, you can fetch and set the current value of the field
+    var fieldValueElement = document.getElementById(field + 'Value');
+    if (fieldValueElement) {
+        document.getElementById('editField').value = fieldValueElement.innerText.trim();
+    }
+
+    // Set the data-field attribute
+    document.getElementById('editField').setAttribute('data-field', field);
+
+    // Set the currentEditField variable
+    currentEditField = field;
+
+    // Set other modal content as needed
+
+    // Display the modal
+    customerEditModal.style.display = 'block';
+}
+
+function closeEditModal() {
+    customerEditModal.style.display = 'none';
+}
+
+function saveChanges() {
+    if (!currentEditField) {
+        console.error('No field specified for saving changes.');
+        return;
+    }
+
+    console.log("Saving changes for field: " + currentEditField);
+
+    var content = document.getElementById('editField').value;
+    console.log(content);
+
+    $.ajax({
+        type: "POST",
+        url: "/gp-user/",
+        data: {
+            field: currentEditField, // Use the currentEditField variable
+            value: content,
+            csrfmiddlewaretoken: getCSRFToken(),
+        },
+        success: function (response) {
+            if (response.status === 'success') {
+                handleSuccess(response);
+            } else {
+                handleError('Došlo je do greške prilikom ažuriranja podataka.');
+            }
+        },
+        error: function () {
+            handleError('Došlo je do greške prilikom slanja zahteva.');
+        }
+    });
+}
+
+
+
+function handleResponse(xhr) {
+    if (xhr.status === 200) {
+        var response;
+        try {
+            response = JSON.parse(xhr.responseText);
+        } catch (e) {
+            console.error("Error parsing JSON:", e);
+            response = { status: 'error' };
+        }
+
+        if (response.status === 'success') {
+            handleSuccess(response);
+        } else {
+            handleError('Došlo je do greške prilikom ažuriranja podataka.');
+        }
+    } else {
+        handleError('Došlo je do greške prilikom slanja zahtjeva.');
+    }
+}
+
+function handleSuccess(response) {
+    alert('Podaci su uspešno ažurirani: ' + response.field + ' -> ' + response.value);
+
+    if (response.field !== null && response.value !== null) {
+        var fieldValueElement = document.getElementById(response.field + 'Value');
+        if (fieldValueElement) {
+            fieldValueElement.textContent = response.value;
+        }
+    }
+
+    closeEditModal();
+}
+
+function handleError(message) {
+    alert(message);
+}
+
+
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+    </script>
+
+
+</body>
+</html>

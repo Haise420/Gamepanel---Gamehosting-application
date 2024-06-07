@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Server Query</title>
+</head>
+<body>
+    <h1>Status: {{ status }}</h1>
+
+    {% if status == "Error" %}
+        <p>Error: {{ error }}</p>
+    {% endif %}
+
+    {% if status != "Empty" %}
+        <p>Server: {{ server }}</p>
+    {% endif %}
+
+    {% if status == "Success" or status == "InfoOnly" %}
+        <h2>Server Info:</h2>
+        <p>Server Name: {{ info.server_name }}</p>
+        <p>Map Name: {{ info.map_name }}</p>
+        <p>Player Count: {{ info.player_count }} / {{ info.max_players }}</p>
+        <p>Ping: {{ ping }}</p>
+
+        {% if players %}
+            <h2>Players:</h2>
+            <ul>
+                {% for player in players %}
+                    <li>{{ player.name }} - Score: {{ player.score }} - Duration: {{ player.duration }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endif %}
+</body>
+</html>

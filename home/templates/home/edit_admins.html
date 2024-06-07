@@ -1,0 +1,151 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Edit File</title>
+    
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">{{ customer.balance }} <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+
+                
+
+
+
+
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+
+                <div class="content">
+                    <hr>
+                    <div class="editfile-content">
+                        <div id="current-path" style="display: none;">{{ current_dir }}</div>
+
+                        <form method="post">
+                            {% csrf_token %}
+                            <textarea class="ftp-file-content" name="file_content" rows="10" cols="50">{{ file_content }}</textarea>
+                            <br>
+                            <button class="ftp-file-save-button" onclick="saveFileContent(document.querySelector('.ftp-content').value)" type="submit" placeholder="">Sacuvaj</button>
+                        </form>
+                    </div>
+
+
+
+
+
+   
+
+    </div>
+</div>
+
+    <div class="sidebar">
+        <div class="sidebar-what">
+            <div class="sidebar-what-content">
+                <div class="side-what-text">
+                    Overview
+                </div>
+            </div>
+            
+        </div>
+         <div class="sidebar-link" data-hover-text="Home">
+            <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+        </div>
+
+        <div class="sidebar-link" data-hover-text="Servers">
+            <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+        </div>
+
+        <div class="sidebar-link" data-hover-text="Support">
+            <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+        </div>
+
+        <div class="sidebar-link" data-hover-text="User Panel">
+            <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+        </div>
+    </div>
+
+    <script src="{% static 'js/cs.js' %}"></script>
+
+    <script>
+        function saveFileContent(updatedContent) {
+            var serverId = parseInt("{{ server.id }}", 10);
+            var currentPath = document.getElementById('current-path').innerText;
+            console.log(currentPath)
+            
+
+            fetch(`/cs/edit_files/${serverId}/${encodeURIComponent(currentPath)}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                    'X-CSRFToken': getCSRFToken(),  // Include CSRF token if required
+                },
+                body: `file_content=${encodeURIComponent(updatedContent)}&current_path=${encodeURIComponent(currentPath)}`,
+            })
+            .then(response)
+            .then(result => {
+                console.log('File saved successfully:', result);
+                // window.location.href = `/cs/webftp/${serverId}/${encodeURIComponent(currentPath)}/`;
+            })
+            .catch(error => {
+                console.error('Error saving file content:', error);
+            });
+        }
+
+
+
+        
+    </script>
+</body>
+</html>

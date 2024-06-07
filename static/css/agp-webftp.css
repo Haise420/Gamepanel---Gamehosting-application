@@ -1,0 +1,58 @@
+body{
+    background-color: black;
+}
+
+.wrapper{
+    display: grid;
+    grid-template: 'nav main main main'
+                   'nav main main main';
+    justify-content: center;
+    max-width: 100%;
+    height: 1200px;
+    gap: 15px;
+}
+
+.nav{
+    grid-area: nav;
+    border: 1px solid white;
+    width: 200px;
+    height: 100%;
+}
+
+.main{
+    grid-area: main;
+    width: 1200px;
+    height: 100%;
+    border: 1px solid white;
+    display: flex;
+}
+
+.webftp-overview{
+    height: 100%;
+    width: 75%;
+    border: 1px solid white;
+}
+
+.sidebar{
+    height: 100%;
+    width: 25%;
+    border: 1px solid white;
+}
+
+.import-file{
+    height: 10%;
+    width: 100%;
+    border: 1px solid white;
+}
+
+.download-file{
+    height: 10%;
+    width: 100%;
+    border: 1px solid white;
+}
+
+.delete-file{
+    height: 10%;
+    width: 100%;
+    border: 1px solid white;
+}

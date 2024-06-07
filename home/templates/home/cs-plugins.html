@@ -1,0 +1,355 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    
+    <title>[ SG:GP ] Plugins</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">420 <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+
+    <div class="content">
+        <hr>
+    <div class="plugins-content">
+        <div class="plugins-header">
+            <div class="plugins-img">
+                <img src="{% static 'images/nav-plugins.png' %}" alt="" class="adm-image">
+            </div>
+            <div class="plugins-text">
+                <h3>Plugins</h3> 
+                <p>Ovde mozete da instalirate 3rd party plugine za vas server sa uskoro nase najvece plugin baze. </p>
+            </div>
+            
+        </div>
+        <div class="plugins-main">
+            <div class="plugins-category">
+                <h3>Plugins Categories</h3>
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Most Popular</div>
+                    
+                </div>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Most Downloaded</div>
+                    
+                </div>
+
+                <br><br>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Public</div>
+                    
+                </div>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Deathmatch</div>
+                    
+                </div>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Deathrun</div>
+                    
+                </div>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Zombie Plague</div>
+                    
+                </div>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Zombie Biohazard</div>
+                    
+                </div>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Knife Arena</div>
+                    
+                </div>
+
+                <br><br>
+
+                <div class="plugin-category">
+                    <img class="plugin-category-img" src="" alt="">
+                    <div class="plugin-category-label">Fun</div>
+                    
+                </div>
+
+            </div>
+            <div class="plugins-overview">
+                
+                                {% for plugin in plugins %}
+                                {% csrf_token %}
+                                    <div class="plugin-tab">
+                                        <img class="plugins-image" src="{% static 'images/nav-plugins.png' %}" alt="">
+                                        <p class="plugin-name">{{ plugin.label }}</p>
+                                        <div class="plugin-buttons">             
+                                            <button id="installPluginBtn" class="plugin-install-btn" data-plugin-name="{{ plugin.name }}" data-server-id="{{ server.id }}" data-plugin-id="{{ plugin.id }}" data-url="{% url 'instaliraj_plugin' server_id=server.id plugin_id=plugin.id %}">Instaliraj</button>
+                                            <button class="inspect-plugin" data-description="{{ plugin.description }}" data-label="{{ plugin.label }}" data-version="{{ plugin.version }}">Pregled</button>
+                                        </div>
+                                        
+
+                                    </div>
+                                    {% endfor %}
+                                
+
+
+                                <div id="pluginModal" class="modal-plugins">
+                                    <div class="modal-content-plugin">
+                                        <span class="close">&times;</span>
+                                        <img class="modal-plugin-img" src="{% static 'images/file.png' %}" alt="">
+                                        <div class="modal-info">
+                                            <p>Name: <span id="pluginLabel"></span></p>
+                                            <p>Version: <span id="pluginVersion"></span></p>
+                                            <pre id="pluginDescription"></pre>
+
+                                        </div>
+                            
+                                    </div>
+                                </div>
+                                
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    var inspectButtons = document.getElementsByClassName('inspect-plugin');
+    var modal = document.getElementById('pluginModal');
+    var labelElement = document.getElementById('pluginLabel');
+    var versionElement = document.getElementById('pluginVersion');
+    var descriptionElement = document.getElementById('pluginDescription');
+
+    for (var i = 0; i < inspectButtons.length; i++) {
+        inspectButtons[i].addEventListener('click', function() {
+            // Postavi tekst u modal pre nego što se prikaže
+            labelElement.textContent = this.getAttribute('data-label');
+            versionElement.textContent = this.getAttribute('data-version');
+            descriptionElement.textContent = this.getAttribute('data-description');
+
+            // Prikaži modal
+            modal.style.display = 'flex';
+        });
+    }
+
+    // Postavi događaj za zatvaranje moda klikom na "x"
+    var closeBtn = document.getElementsByClassName('close')[0];
+    closeBtn.onclick = function() {
+        modal.style.display = 'none';
+    };
+
+    // Zatvori modal ako korisnik klikne izvan moda
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = 'none';
+        }
+    };
+</script>
+
+<script>
+    
+    
+    
+
+</script>
+
+
+
+
+<script>
+
+document.querySelectorAll('.plugin-install-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    // Uzimanje imena plugina iz data atributa dugmeta
+    var pluginName = this.getAttribute('data-plugin-name');
+
+    // Pozivanje funkcije za dodavanje nove linije i čuvanje sadržaja
+    addNewLine(pluginName);
+    var installPluginBtn = $(this);
+    var serverId = installPluginBtn.data('server-id');
+    var pluginId = installPluginBtn.data('plugin-id');
+    var installPluginUrl = installPluginBtn.data('url');
+
+    $.ajax({
+        url: installPluginUrl,
+        type: 'GET',  
+        success: function(response) {
+            console.log(response);
+            // Assuming a successful installation should reload the page
+            location.reload();
+        },
+        error: function(error) {
+            console.error('Greška prilikom instalacije plugina:', error.responseText);
+            alert('Došlo je do greške prilikom instalacije plugina.');
+        }
+    });
+});
+    
+  });
+
+
+// Funkcija za dodavanje nove linije i čuvanje sadržaja
+function addNewLine(newPluginName) {
+    var otherPageUrl = "{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/plugins.ini/";
+
+    // AJAX poziv za preuzimanje trenutnog sadržaja plugins.ini
+    $.ajax({
+        url: otherPageUrl,
+        type: 'GET',
+        success: function (data) {
+            // Pronalazi textarea sa klasom ftp-file-content
+            var textareaContent = $(data).find('.ftp-file-content').val();
+
+            // Formiranje nove linije za dodavanje na kraj dokumenta
+            var newLine = newPluginName;
+
+            // Dodavanje nove linije na kraj postojećeg sadržaja
+            var updatedContent = textareaContent + '\n' + newLine;
+
+            // Pozivanje funkcije za čuvanje dokumenta
+            saveFileContent(updatedContent);
+
+            // Opciono: Resetovanje vrednosti polja nakon dodavanja
+            $('#newPluginName').val('');
+        },
+        error: function () {
+            console.error('Greška prilikom preuzimanja sadržaja.');
+        }
+    });
+}
+
+// Funkcija za čuvanje ažuriranog sadržaja
+function saveFileContent(updatedContent) {
+    var serverId = parseInt("{{ server.id }}", 10);
+
+    // Uzimanje vrednosti currentPath sa servera
+    var currentPath = "/{{ server.port }}/cstrike/addons/amxmodx/configs/plugins.ini/";
+
+    fetch(`/cs/edit_plugins/${serverId}${encodeURIComponent(currentPath)}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCSRFToken(),  // Include CSRF token if required
+        },
+        body: `file_content=${encodeURIComponent(updatedContent)}&current_path=${(currentPath)}`,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(result => {
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error saving file content:', error);
+    });
+}
+
+
+    function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+
+
+    </script>
+
+<script src="{% static 'js/cs.js' %}"></script>
+
+
+
+
+
+</body>
+</html>

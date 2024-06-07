@@ -1,0 +1,2519 @@
+@font-face {
+    font-family: 'CodecColdTrialBold';
+    src: url('/static/fonts/source-sans-pro.black.ttf') format('truetype');
+    /* Dodatne varijacije fonta ako su dostupne (npr. bold, italic) */
+}
+
+
+html, body{
+    background: #2e0558;
+    height: 100%;
+    overflow-y: hidden;
+    background-image: url(/static/images/sg-bg.png);
+    background-size: cover;
+    font-family: 'CodecColdTrialBold', sans-serif;
+}
+
+.wrapper-bg{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+
+.wrapper{
+    grid-template: 'main main main main user'
+                    'main main main main sidebar'
+                    'main main main main sidebar';
+    display: grid;
+    justify-content: center;
+    max-width: 100%;
+    padding: 15px;
+    position: relative;
+    gap: 25px;
+
+}
+.wrapperlogin{
+    grid-template: 'mainlogin mainlogin mainimg mainimg'
+                    'mainlogin mainlogin mainimg mainimg';
+    display: grid;
+    justify-content: center;
+    padding: 15px;
+    max-width: 100%;
+    height: 600px;
+    gap: 0.5px;
+    
+}
+
+.main{
+    grid-area: main;
+    width: 1200px;
+    display: grid;
+    height: 800px;
+    grid-template: 'nav nav nav'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content'
+                    'content content content';
+    padding: 15px;
+    gap: 5px;
+    border-radius: 15px;
+    -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+    -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+    box-shadow: 0px 0px 20px 0px #aa00ff;
+    border: 1px solid #aa00ff;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+}
+
+.server-info-content{
+    width: 50%;
+    height: 100%;
+    margin-top: -3px;
+
+}
+
+
+.console-hr{
+    margin-top: -35px;
+}
+
+.admins-hr{
+    margin-top: -45px;
+}
+
+.boost-hr{
+    margin-top: 0px;
+}
+
+.player-tab{
+    
+    display: flex;
+    gap: 50px;
+    color: white;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    border-bottom: 1px solid #aa00ff;
+    animation-name: example2;
+    animation-duration: 25s;
+    animation-iteration-count: infinite;
+}
+
+
+.player-tab a{
+    text-align: center;
+    border-radius: 15px;
+    width: 100px;
+    height: 20px;
+    margin-top: 15px;
+    background-color: blueviolet;
+
+}
+
+.player-tab a:hover{
+
+    color: black;
+    cursor: pointer;
+    background-color: rgb(79, 13, 141);
+}
+
+.player-table{
+    width: 100%;
+    border: 1px solid #aa00ff;
+}
+
+.player-table th{
+    color: white;
+    border-bottom: 1px solid #aa00ff;
+    border-right: 1px solid #aa00ff;
+}
+
+
+.player-table td{
+    height: 30px;
+    color: white;
+    text-align: center;
+    border-right: 1px solid #aa00ff;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+
+.player-table a{
+    margin-top: 5px
+}
+
+.server-img{
+    place-self: center;
+    height: 100%;
+    background-color: var(--blue);
+    width: 100%;
+}
+
+.server-controls{
+    display: flex;
+    gap: 10px;
+    position: absolute;
+    right: 15;
+}
+
+.server-information{
+    margin-left: 15px;
+}
+
+.gasenje-button{
+    width: 40px;
+    
+    border-radius: 150px;
+
+    border: 1px solid white;
+    transition: 0.1s ease-in-out;
+    
+}
+
+.gasenje-button:hover{
+    cursor: pointer;
+    scale: 0.9;
+    filter: hue-rotate(100deg);
+
+}
+
+.startovanje-button{
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 150px;
+    transition: 0.2s ease-in-out;
+}
+
+.startovanje-button:hover{
+    cursor: pointer;
+    scale: 0.9;
+    filter: hue-rotate(-100deg);
+
+}
+
+
+.restartovanje-button {
+    width: 40px;
+    border: 1px solid white;
+    border-radius: 150px;
+    position: relative;
+    transition: 0.2s ease-in-out;
+}
+
+.restartovanje-button:hover {
+    cursor: pointer;
+    transform: scale(0.9); /* Ispravljena greška ovde */
+    filter: hue-rotate(-100deg);
+}
+
+
+
+.server-controls-advanced{
+    display: flex;
+    width: 1200px;
+    height: 50px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    justify-content: start;
+    align-items: center;
+    margin-bottom: 5px;
+    border-radius: 15px;
+}
+
+.controls-separator{
+    margin-left: 10px;
+    width: 5px;
+    height: 80%;
+    background-color: #aa00ff;
+    border-radius: 35px;
+}
+
+.shortcut-label{
+    color: white;
+    margin-left: 10px;
+}
+
+.shortcut-name{
+    background-color: #aa00ff;
+    color: white;
+    border-radius: 5px;
+    margin-left: 10px;
+    width: 80px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.shortcut-name:hover{
+    background-color: #5636cb;
+}
+
+.ftp-lock{
+    width: 135px;
+    transition: 0.2s ease-in-out;
+    cursor: pointer;
+}
+
+.ftp-lock:hover{
+    scale: 0.9;
+
+}
+
+.shortcut-settings{
+    background-color: #aa00ff;
+    color: white;
+    border-radius: 5px;
+    margin-left: 25px;
+    width: 145px;
+    height: 35px;
+    justify-content: center;
+    font-weight: bolder;
+    align-items: center;
+    text-align: center;
+    text-decoration: none;
+    display: flex;
+}
+
+.shortcut-settings:hover{
+    background-color: #5636cb;
+}
+
+.server-name{
+    place-content: center;
+    width: 100%;
+    height: 25%;
+    position: relative;
+    align-items: center;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    justify-content: center;
+    display: flex;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.server-graph{
+    width: 100%;
+    height: 70%;
+    color: white;
+    border-left: 1px solid #aa00ff;
+    border-right: 1px solid #aa00ff;
+    border-bottom: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    background: rgb(87,87,241);
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+
+}
+
+.status-online {
+    font-weight: 900;
+    margin-top: 0px;
+
+    color: rgb(15, 233, 15);
+}
+
+.status-offline {
+    margin-top: -3px;
+    margin-left: 3px;
+    color: red;
+}
+
+.status-colors{
+    gap: 5px;
+    margin-bottom: -15px;
+    display: flex;
+}
+
+
+.webftp-content{
+    color: white;
+    margin-top: 5px;
+    height: 650px;
+
+}
+
+.ftp-login-naslov{
+    height: 25%;
+    margin-top: 25px;
+    width: 100%;
+    font-size: 20px;
+    color: white;
+
+    
+}
+
+
+.ftp-label{
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    border-top: 1px solid #aa00ff;
+    border-right: 1px solid #aa00ff;
+    border-left: 1px solid #aa00ff;
+    box-shadow: 3px 3px #aa00ff;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    width: 100%;
+    height: 24%;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+hr{
+    height: 7px;
+    margin-top: -3px;
+  background-color: #aa00ff;
+  border: none;
+  border-radius: 35px;
+}
+
+.name-label{
+    display: flex;
+    align-self: center;
+    font-size: 23px;
+    align-items: center;
+    justify-content: start;
+    color: white;
+    position: absolute;
+    left: 15;
+}
+
+.ftp-login{
+    gap: 10px;
+    width: 35%;
+    height: 100%;
+    text-align: center;
+    font-weight: bold;
+}
+
+#ftp-save-button{
+    display: none;
+    width: 300px;
+    margin-top: 35px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 35px;
+    cursor: pointer;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.ftp-file-content{
+    border: 1px solid #aa00ff;
+    border-radius: 7px;
+    margin-top: 5px;
+    color: white;
+    resize: none;
+    width: 1200px;
+    height: 550px;
+    font-family: 'CodecColdTrialBold', sans-serif;
+    position: relative;
+    white-space: pre-wrap;
+    background-color: #582bf7;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+
+.ftp-file-content::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .ftp-file-content::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .ftp-file-content::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+.ftp-file-save-button{
+    width: 300px;
+    margin-top: 35px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 35px;
+    cursor: pointer;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.modal-input{
+    text-align: center;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    height: 30px;
+    width: 200px;
+    border-radius: 5px;
+    color: white;
+}
+
+.modal-input::placeholder{
+    color: white;
+}
+
+.save-new-line-button{
+    width: 200px;
+    margin-top: 35px;
+    height: 70px;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 35px;
+    cursor: pointer;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    transition: 0.2s ease-in-out;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+}
+
+.modal-plugins {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.4);
+    padding-top: 60px;
+    justify-content: center;
+    align-items: center;
+}
+
+#confirmationModal {
+    z-index: 5;
+    display: none; /* Modal je inicijalno sakriven */
+    position: fixed; /* Fiksirani položaj */
+    top: 0;
+    left: 0;
+    width: 100%; /* Puna širina */
+    height: 100%; /* Puna visina */
+    background-color: rgba(0, 0, 0, 0.5); /* Providna pozadina */
+}
+
+#pluginDescription{
+    margin-left: -25px;
+}
+
+.modal-content {
+    color: white;
+    box-shadow: inset 2px 0px 10px 1px #aa00ff;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    margin: 15% auto; /* Centralno pozicioniranje */
+    padding: 20px;
+    border: 1px solid #aa00ff;
+    justify-content: center;
+    width: 35%;
+    border-radius: 45px;
+    position: relative;
+    display: grid;
+}
+
+.modal-info{
+    display: grid;
+    width: 90%;
+    
+}
+
+.modal-content-plugin {
+  
+    position: relative;
+    color: white;
+    box-shadow: inset 2px 0px 10px 1px #aa00ff;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    margin: 15% auto; /* Centralno pozicioniranje */
+    padding: 20px;
+    border: 1px solid #aa00ff;
+    justify-content: center;
+    width: 1200px;
+    overflow: hidden;
+    word-break: break-all;
+    border-radius: 45px;
+    display: flex;
+    align-items: center;
+}
+
+.modal-plugin-img{
+    width: 70px;
+    height: 50px;
+    align-self: start;
+}
+
+.modal-content-grid {
+    display: grid;
+    gap: 15px;
+}
+
+
+
+.close {
+    color: #ffffff;
+    position: absolute;
+    right: 15;
+    top: 15;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: #934caf;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#confirmInstallBtn {
+    right: 65;
+    top: 95;
+    background-color: #934caf;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#confirmInstallBtn:hover {
+    background-color: rgb(84, 12, 105);
+}
+
+
+.refresh-button{
+    width: 35px;
+    height: 35px;
+    border: 1px solid white;
+    border-radius: 140px;
+    transition: 0.1s ease-in-out;
+    margin-left: 10px;
+}
+
+.refresh-button:hover{
+    cursor: pointer;
+    scale: 0.9;
+    filter: hue-rotate(100deg);
+
+}
+
+
+.ftp-cred{
+    width: 100%;
+    text-align: left;
+    display: flex;
+    height: 70%;
+    place-items: center;
+    justify-content: center;
+    color: white;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    box-shadow: 3px 1px #aa00ff;
+    border: 1px solid #aa00ff;
+
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.nav{
+    grid-area: nav;
+    display: flex;
+    justify-content: space-around;
+    place-items: center;
+    width: 100%;
+    height: 150px;
+    margin-top: -20px;
+
+}
+
+.nav-button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px solid white;
+    border-bottom: 1px solid #aa00ff;
+    width: 140px;
+    border-right: 1px solid #aa00ff;
+    cursor: pointer;
+    height: 80px;
+    font-size: large;
+    transition: 0.3s ease;
+    border-radius: 360px;
+    color: white;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.nav-button:hover{
+    font-size: small;
+    background-color: blue;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+}
+
+.nav-overview{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.overview-content{
+    margin-top: 0px;
+}
+
+.nav-console{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.nav-webftp{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.nav-admins{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.nav-plugins{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.nav-mods{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.nav-boost{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.nav-backup{
+    color: white;
+    text-decoration: none;
+    align-self: center;
+}
+
+.console-content{
+    display: block;
+    height: 650px;
+}
+
+.send-rcon-btn{
+    height: 59%;
+    margin-left: 10px;
+    border-radius: 7px;
+    width: 15%;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+    font-size: 23px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    color: white;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    margin-top: 5px;
+    transition: 0.15s ease;
+
+}
+
+.send-rcon-btn:hover{
+    scale: 0.9;
+    text-shadow: 2px 2px #aa00ff;
+}
+
+.send-rcon-btn:active{
+    scale: 0.6;
+    text-shadow: 2px 2px #aa00ff;
+    font-size: 25px;
+}
+
+.rcon-result{
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.console-header{
+
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    display: flex;
+    height: 20%;
+    width: 100%;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    color: white;
+    gap: 10px;
+
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.console-img{
+    height: 100%;
+    width: 200px;
+
+}
+
+.console-image{
+    height: 100%;
+    width: 100%;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    border-right: 3px solid #aa00ff;
+}
+
+
+
+.console-text{
+    width: 550px;
+    height: 100%;
+
+}
+
+.console-main{
+    width: 97.5%;
+    height: 65%;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    margin-top: 5px;
+    color: white;
+    padding: 15px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+
+}
+
+.console-main::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .console-main::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .console-main::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+.console-input{
+    width: 90%;
+    height: 59%;
+    border-radius: 7px;
+    background: none;
+    font-size: 23px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    color: white;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    margin-top: 5px;
+
+
+}
+
+.console-input::placeholder{
+    color: white;
+    
+}
+
+.console-controls{
+    width: 100%;
+    height: 20%;
+    display: flex;
+
+}
+
+.content{
+    grid-area: content;
+    width: 100%;
+    position: relative;
+    margin-top: -25px;
+    
+}
+
+.server-info{
+    width: 100%;
+    height: 300px;
+
+    position: relative;
+    top: 0;
+    display: flex;
+    gap: 10px;
+
+}
+
+.ftp-header{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    display: flex;
+    height: 20%;
+    width: 100%;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    border: 1px solid white;
+    gap: 10px;
+    
+
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.ftp-img{
+    height: 100%;
+    width: 200px;
+    border-right: 3px solid #aa00ff;
+    
+}
+
+.ftp-image{
+    height: 100%;
+    width: 200px;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+}
+
+.boost-image{
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    height: 100%;
+    width: 100%;
+}
+
+.adm-image{
+    height: 100%;
+    width: 200px;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    border-right: 3px solid #aa00ff;
+}
+
+.ftp-text{
+    width: 50%;
+    height: 100%;
+    color: white;
+
+}
+
+.ftp-controls{
+    margin-left: 40px;
+    width: 40%;
+    height: 100%;
+
+}
+
+.ftp-item{
+    text-decoration: none;
+    color: white;
+}
+
+.ftp-item:hover{
+    color: violet;
+}
+
+.dir-icon{
+    margin-left: 20px;
+    margin-right: 5px;
+    width: 40px;
+    height: 30px;
+}
+
+.ftp-list-item{
+    background-color: #582bf7;
+    width: 95%;
+    height: 20px;
+}
+
+.hr-ftpwindow{
+    margin-top: 10px;
+}
+
+.ftp-shortcuts{
+    display: flex;
+    width: 1200px;
+    height: 50px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    border-radius: 15px;
+}
+
+.plugins-image{
+    width: 50px;
+}
+
+.ftp-window{
+    width: 100%;
+    margin-top: 5px;
+    height: 450px;
+    grid-template-columns: repeat(auto-fit, minmax(15%, 410px));
+    overflow: hidden;
+    display: grid;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    border: 1px solid white;
+    gap: 5px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    position: relative;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.ftp-window::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .ftp-window::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .ftp-window::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+.ftp-dir-tab{
+    display: flex;
+    height: 50px;
+    justify-content: start;
+    align-items: center;
+}
+
+.ftp-content{
+    color: white;
+    max-width: 1200px;
+    width: 1200px;
+    height: 450px;
+    position: fixed;
+    white-space: pre-wrap;
+    background-color: #582bf7;
+}
+
+
+.ftp-content::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .ftp-content::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .ftp-content::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+.admins-header{
+    display: flex;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    height: 20%;
+    width: 100%;
+    gap: 10px;
+    border: 1px solid white;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.admins-table{
+    color: white;
+}
+
+.admins-table th{
+    background-color: blueviolet;
+    height: 50px;
+    width: 250px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.admins-table td{
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    text-align: center;
+}
+
+
+.admins-img{
+    height: 100%;
+    width: 200px;
+}
+
+.admins-text{
+    width: 30%;
+    height: 100%;
+    color: white;
+
+}
+
+.admins-overview{
+    width: 100%;
+    margin-top: 5px;
+    height: 57%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.admins-overview::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .admins-overview::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .admins-overview::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+.add-admin-btn{
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    width: 30%;
+    border-radius: 45px;
+    height: 79%;
+    position: absolute;
+    right: 15;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    top: 12px;
+    color: white;
+    font-size: 32;
+    background-color: #582bf7;
+    transition: 0.1s ease-in;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+}
+
+.add-admin-btn:hover{
+    font-size: 36px;
+    cursor: pointer;
+    background-color: #5636cb;
+}
+
+.admins-content{
+    margin-top: 0px;
+    height: 650px;
+}
+
+.admins-controls{
+    width: 100%;
+    height: 20%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    margin-top: 5px;
+    position: relative;
+}
+
+.plugins-content{
+    height: 650px;
+}
+
+.plugin-tab{
+    color: white;
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    height: 100px;
+    width: 300px;
+    background-color: #934caf;
+    border: 1px solid #aa00ff;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.inspect-plugin{
+    width: 80px;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.15s ease-in-out;
+
+    
+}
+
+.inspect-plugin:hover {
+    font-size: 15px;
+}
+
+.plugin-buttons{
+    display: grid;
+    place-items: center;
+    gap: 3px;
+}
+
+.plugin-install-btn{
+    width: 95px;
+    transition: 0.2s ease;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.plugin-install-btn:hover{
+    background-color: rgb(208, 203, 203);
+    font-size: 16px;
+}
+
+.plugin-name{
+    width: 130px;
+    text-align: center;
+}
+
+.plugins-header{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    display: flex;
+    height: 20%;
+    width: 100%;
+
+    gap: 10px;
+    margin-bottom: 5px;
+
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.plugins-img{
+    height: 100%;
+    width: 200px;
+}
+
+.plugins-text{
+    width: 35%;
+    height: 100%;
+    color: white;
+}
+
+.plugins-category{
+    width: 30%;
+    height: 80%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.plugins-category h3{
+    font-size: 24px;
+    color: white;
+    text-align: center;
+}
+
+.plugin-category{
+    display: flex;
+    place-items: center;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    justify-content: center;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    width: 100%;
+    height: 7%;
+    color: white;
+    font-size: 22px;
+    transition: 0.1s ease-in-out;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+}
+
+.plugin-category:hover{
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgb(49, 8, 74) 100%);
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.plugin-category-image{
+    font-size:15px
+
+}
+
+.plugin-category-label{
+    margin-left: 5px;
+
+}
+
+.plugins-overview{
+    width: 70%;
+    height: 80%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    display: grid;
+    grid-template-columns: 300px 300px;
+    gap: 5px 70px;
+    justify-content: center;
+    align-items: center;
+    animation-name: example2;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+
+}
+
+.plugins-overview::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .plugins-overview::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .plugins-overview::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+
+.boost-content{
+    margin-top: 0px;
+    height: 650px;
+}
+
+.plugins-main{
+    width: 100%;
+    height: 99%;
+    display: flex;
+}
+
+.mods-content{
+    height: 650px;
+}
+
+.mods-header{
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    border: 1px solid white;
+    display: flex;
+    height: 20%;
+    width: 100%;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    gap: 10px;
+    margin-bottom: 5px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.mod-slika{
+    height: 200px;
+    position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 1;
+  transition: 0.2s ease;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+  
+  background: linear-gradient(312deg, rgb(47, 5, 90) 0%, rgb(106, 4, 170) 100%);
+}
+
+.install-mod{
+    position: absolute;
+    z-index: 0;
+}
+
+.install-link{
+    text-decoration: none;
+    color: white;
+    font-weight: 700;
+    transition: 0.2s ease-in-out;
+    width: 150px;
+}
+
+.install-link:hover{
+    background-color: #5636cb;
+    font-size: 20px;
+    border: 10px solid #5636cb;
+    border-radius: 40px;
+
+}
+
+.install-link-disabled{
+    text-decoration: none;
+    color: white;
+    background-color: #5636cb;
+    font-weight: 700;
+    transition: 0.1s ease;
+    width: 145px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    height: 75px;
+    border-radius: 40px;
+    font-size: 11px;
+}
+
+.install-link-disabled:hover{
+    font-size: 12px;
+    background-color: #5f3be0;
+
+}
+
+
+
+
+
+.mods-overview:hover .install-mod{
+    z-index: 2;
+}
+
+
+.mods-img{
+    height: 100%;
+    
+    width: 200px;
+}
+
+.mods-image{
+    border-right: 3px solid #aa00ff;
+    height: 100%;
+    width: 200px;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+
+}
+
+.mod-name{
+    font-size: 23px;
+    color: white;
+    z-index: 2;
+    top: -100;
+    pointer-events: none;
+    cursor: default;
+    position: absolute;
+}
+
+.mod-label{
+    font-size: 23px;
+    color: white;
+    z-index: 2;
+    top: 120;
+    pointer-events: none;
+    cursor: default;
+    position: absolute;
+}
+
+.mods-text{
+    width: 35%;
+    height: 100%;
+    color: white;
+}
+
+
+.mods-main{
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    place-items: center;
+    width: 100%;
+    height: 500px;
+    display: grid;
+    
+    grid-template-columns: repeat(4, 1fr); /* 4 kolone */
+    gap: 55px 5px; /* Opciono: razmak između itema */
+    border: 1px solid #aa00ff;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+}
+
+.mods-main::-webkit-scrollbar {
+    width: 12px; /* Širina scroll bara */
+  }
+  
+  .mods-main::-webkit-scrollbar-thumb {
+    background-color: #aa00ff;
+    border-radius: 10px; /* Radijus zaobljenja thumb-a */
+  }
+  
+  .mods-main::-webkit-scrollbar-track {
+    background-color: #310447; /* Boja tragača (tragača pozadine) */
+  }
+
+.mods-overview{
+    margin-top: 15px;
+    height: 200px;
+    width: 200px;
+    display: flex;
+    border: 1px solid #aa00ff;
+    border-radius: 17%;
+    overflow: hidden;
+    justify-content: center;
+    place-items: center;
+    position: relative;
+    transition: 0.2s ease-in;
+    box-shadow: 10px 10px 10px 1px #270637;
+}
+
+.mods-overview:hover{
+
+    scale: 0.9;
+}
+
+
+.backup-header{
+    color: white;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    display: flex;
+    height: 20%;
+    width: 100%;
+    gap: 10px;
+    
+}
+
+.backup-image{
+    width: 100%;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    height: 100%;
+
+}
+
+.backup-img{
+    height: 100%;
+    border-right: 3px solid #aa00ff;
+    width: 200px;
+}
+
+.backup-text{
+    width: 30%;
+    height: 100%;
+
+}
+
+.backup-content{
+    margin-top: 0px;
+    height: 650px;
+}
+
+.factory-reset{
+    color: white;
+    width: 100%;
+    margin-top: 5px;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+    height: 38%;
+
+}
+
+.factory-reset-text{
+    height: 150px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    width: 40%;
+    justify-content: center;
+    background-color: #aa00ff;
+    border-radius: 15px;
+    text-shadow: 2px 2px black;
+    font-size: 18px;
+}
+
+.factory-reset-tab{
+    width: 30%;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.factory-reset-btn{
+    display: flex;
+    justify-content: center;
+    place-items: center;
+    width: 50%;
+    border-radius: 45px;
+    height: 39%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    color: white;
+    font-size: 16;
+    cursor: pointer;
+    background-color: #582bf7;
+    transition: 0.1s ease-in;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+}
+
+.factory-reset-btn:hover{
+    font-size: large;
+    scale: 1.1;
+}
+
+.backup-todate{
+    width: 100%;
+    height: 38%;
+    color: white;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+    margin-top: 5px;
+}
+
+.boost-header{
+    
+    color: white;
+    display: flex;
+    height: 20%;
+    width: 100%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 65px;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background-image: url(/static/images/header.png);
+    background-size: cover;
+    gap: 10px;
+    
+}
+
+.boost-img{
+    height: 100%;
+    width: 200px;
+    border-right: 3px solid #aa00ff;
+}
+
+.boost-text{
+    width: 30%;
+    height: 100%;
+
+
+}
+
+.boost-main{
+    color: white;
+    display: flex;
+    width: 100%;
+    margin-top: 5px;
+    height: 80%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+    justify-content: center;
+    
+}
+
+.boost-active{
+    width: 33%;
+    height: 100%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+
+}
+
+.boost-available{
+    width: 33%;
+    height: 100%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+}
+
+.boost-index{
+    width: 33%;
+    height: 100%;
+
+    display: grid;
+}
+
+.boost-count{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+
+}
+
+.boost-schedule{
+    width: 100%;
+    height: 100%;
+    border: 1px solid #aa00ff;
+    box-shadow: 1px 3px #aa00ff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation-name: example2;
+    animation-duration: 35s;
+    animation-iteration-count: infinite;
+    background: linear-gradient(312deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+
+}
+
+.nav-icon{
+    width: 40px;
+    height: 40px;
+}
+
+.playerlist{
+    height: 300px;
+    overflow: hidden;
+    overflow-y: auto;
+    max-height: 300px;
+    scroll-behavior: smooth;
+    width: 100%;
+    color: white;
+}
+
+
+@keyframes example {
+    0%   {box-shadow: 15px 0px 95px 10px #aa00ff;}
+    10%  {box-shadow: 25px 15px 95px 25px #aa00ff}
+    30%  {box-shadow: 15px 25px 95px 35px #aa00ff}
+    50%  {box-shadow: -25px -25px 95px 35px #aa00ff}
+    70% {box-shadow: -15px -15px 95px 35px #aa00ff}
+    100%   {box-shadow: 0px 0px 95px 20px #aa00ff}
+  }
+
+
+  @keyframes example2 {
+    0%   {box-shadow: inset 2px 0px 10px 1px #aa00ff;}
+    10%  {box-shadow: inset 2px 2px 15px 1px #aa00ff}
+    30%  {box-shadow: inset 2px 2px 10px 1px #aa00ff}
+    50%  {box-shadow: inset -3px -3px 5px 1px #aa00ff}
+    70% {box-shadow: inset -4px -4px 5px 1px #aa00ff}
+    100%   {box-shadow: inset 0px 3px 10px 1px #aa00ff}
+  }
+
+
+
+  .hidden {
+    display: none;
+  }
+
+.usernameicon{  
+    position: absolute;
+    width: 35px;
+    top: 2;
+    left: 0;
+    margin-left: -40px;
+}
+.passwordicon{
+    position: absolute;
+    width: 35px;
+    top: 52;
+    left: 0;
+    margin-left: -40px;
+}
+.repasswordicon{
+    position: absolute;
+    width: 35px;
+    top: 102;
+    left: 0;
+    margin-left: -40px;
+}
+.emailicon{
+    position: absolute;
+    width: 35px;
+    top: 152;
+    left: 0;
+    margin-left: -40px;
+}
+.mainlogin{
+    grid-area: mainlogin;
+    border: 1px solid black;
+    display: grid;
+    justify-content: center;
+    width: 500px;
+    position: relative;
+    background-image: url('bg-servers-main.png');
+    border: 0.3px solid pink;
+    animation-name: example;
+    animation-duration: 10s;
+    animation-iteration-count:infinite;
+    
+
+}
+.mainimg{
+    grid-area: mainimg;
+    border: 1px solid black;
+    width: 500px;
+    border: 0.3px solid pink;
+    animation-name: example;
+    animation-duration: 10s;
+    animation-iteration-count:infinite;
+}
+.slika{
+    width: 500px;
+    height: 100%;
+}
+
+.loginunos{
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(198, 198, 255);
+    text-align: center;
+
+}
+.registerunos{
+    height: 40px;
+    width: 100%;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: rgb(198, 198, 255);
+}
+.unosclass{
+    display: grid;
+    height: 100px;
+    width: 220px;
+    position: relative;
+    top: 150px;
+}
+.registerclass{
+    display: grid;
+    height: 200px;
+    width: 220px;
+    position: relative;
+    top: 150px;
+}
+.logindugme{
+    height: 55px;
+    border-radius: 60px;
+    cursor: pointer;
+    margin-top: 150px;
+    background-color: rgb(46, 46, 255);
+    font-size: 20px;
+    font-weight: 800;
+    color: aliceblue;
+    width: 220px;
+    transition: 0.3s ease-in-out;
+
+}
+.logindugme:hover{
+    background-color: rgb(0, 0, 255);
+    transition: background-color 0.4s ease-in;
+    border: 1px solid white;
+}
+.napravinalog{
+    text-decoration: none;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    font-weight: 900;
+    cursor: pointer;  
+    width: 150px;
+    height: 50px;
+    text-align: center;
+    padding: 5px;
+    bottom: 0;
+    position: absolute;
+    right: 0;
+    transition: 0.3s ease-in;
+}
+.napravinalog:hover{
+    text-shadow: 4px 0px rgb(109, 6, 149);
+    
+}
+
+.sidebar{
+    grid-area: sidebar;
+    width: 100px;
+    display: grid;
+    height: 400px;
+    border: 1px solid #aa00ff;
+    align-self: center;
+    border-radius: 200px;
+    justify-content: center;
+    position: absolute;
+    margin-top: -170px;
+    -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+    -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+    box-shadow: 0px 0px 20px 0px #aa00ff;
+    transition: box-shadow 0.3s ease-in;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+}
+
+
+.informacije{
+    border: 1px solid white;
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    color: aliceblue;
+}
+.info-text{
+    padding: 35px;
+    text-align: center;
+    font-size: 30px;
+}
+
+
+
+.sidebar-link{
+    align-self: center;
+    cursor: pointer;
+    background: none;
+    border-radius: 145px;
+    transition: box-shadow 0.5s ease-in-out;
+  
+
+}
+.sidebar-link:hover{
+    -webkit-box-shadow: 0px 0px 25px 5px rgba(255,255,255,0.15);
+    -moz-box-shadow: 0px 0px 25px 5px rgba(255,255,255,0.15);
+    box-shadow: 0px 0px 25px 5px rgba(255,255,255,0.15);
+    
+}
+
+.sidebar-img-home{
+    width: 65px;
+    transition: 0.2s ease-out;
+
+}
+.sidebar-img-home:hover{
+    transform: scale(1.1);
+
+}
+
+.sidebar-img-servers{
+    width: 65px;
+    transition: 0.1s ease-out;
+
+}
+.sidebar-img-servers:hover{
+    transform: scale(1.1);
+
+}
+
+.sidebar-img-support{
+    width: 65px;
+    transition: 0.2s ease-out;
+
+}
+.sidebar-img-support:hover{
+    transform: scale(1.1);
+
+}
+
+.slider-info{
+    grid-area: slider-info;
+    width: 100%;
+    height: 650px;
+}
+
+.sidebar-what{
+    color: white;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    display: flex;
+    flex-direction: column;
+    height: 400px;
+    position: absolute;
+    right: -31;
+    width: 30px;
+    content: "homo";
+}
+
+.sidebar-what-content{
+    align-self: center;
+    border-radius: 15px;
+    justify-content: center;
+    height: auto;
+    padding-bottom: 15px;
+    width: 25px;
+    border: 1px solid #aa00ff;
+    background-color: #aa00ff;
+
+}
+
+.side-what-text{
+    margin-top: 17px;
+    margin-right: 5px;
+    text-shadow: 3px 0px blueviolet;
+}
+
+.main-updates{
+    grid-area: main-updates;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(0, 55, 255);
+    border-top-left-radius: 55px;
+    border-bottom-left-radius: 55px;
+}
+
+.main-info{
+    grid-area: main-info;
+    width: 100%;
+    height: 100px;
+    background-color: rgb(0, 55, 255);
+    justify-content: center;
+    display: flex;
+    border-top-right-radius: 55px;
+    border-bottom-right-radius: 55px;
+}
+.updates{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    font-size: 45px;
+    background: linear-gradient(270deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 100%);
+    text-shadow: 4px 4px #582bf7;
+    cursor: pointer;
+    border-top-left-radius: 55px;
+    border-bottom-left-radius: 55px;
+    font-weight: 600;
+    transition: 0.3s ease-in;
+
+}
+
+.updates:hover{
+    background: linear-gradient(270deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 60%);
+    color: white;
+    font-weight: 900;
+}
+
+
+.informacije-button{
+    width: 100%;
+    height: 100%;
+    font-size: 45px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    border-top-right-radius: 55px;
+    border-bottom-right-radius: 55px;
+    font-weight: 600;
+    background: linear-gradient(90deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 100%);
+    text-shadow: 4px 4px #582bf7;
+    transition: 0.3s ease-in-out;
+}
+
+.informacije-button:hover{
+    background: linear-gradient(90deg, rgba(78,47,255,1) 0%, rgba(11,13,113,1) 60%);
+    color: white;
+    font-weight: 900;
+    
+}
+.informacije-text{
+    margin-top: 20px;
+    margin-left: -15px;
+    color: white;
+}
+
+.slider-info-img{
+    width: 100%;
+    height: 100%;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+}
+
+.sidebar-img-user{
+    width: 65px;
+}
+
+.sidebar-img-user:hover{
+    height: 70px;
+    transition: height 0.3s ease-in;
+}
+
+.user{
+    grid-area: user;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+    width: 100px;
+    border: 1px solid #aa00ff;
+    height: 250px;
+    position: relative;
+    border-radius: 200px;
+    -webkit-box-shadow: 0px 0px 20px 0px #aa00ff;
+    -moz-box-shadow: 0px 0px 20px 0px #aa00ff;
+    box-shadow: 0px 0px 20px 0px #aa00ff;
+    justify-content: center;
+    display: grid;
+    grid-template: 'user-img'
+                    'user-info';
+    justify-items: center;
+    transition: box-shadow 0.2s ease-in;    
+
+}
+
+
+.user-img{
+    overflow: hidden;
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    position: absolute;
+    top: 25;
+    grid-area: user-img;
+    width: 70px;
+    border: 1px solid #aa00ff;
+    height: 70px;
+    border-radius: 70px;
+}
+
+.user-info{
+    grid-area: user-info;
+}
+
+.user-username{
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.user-balance{
+    justify-content: center;
+    width: 70px;
+    text-align: center;
+    bottom: 85;
+    left: 15;
+    color: white;
+    position: absolute;
+    background-color: rgb(87 87 241);
+    border-radius: 35px;
+    display: flex;
+}
+
+.user-logout{
+    width: 100px;
+    text-align: center;
+    bottom: 30;
+    left: 0;
+    color: white;
+    position: absolute;
+    transition: 0.3s ease-in;
+
+}
+.logout{
+    font-weight: 600;
+    font-size: 18px;
+    text-decoration: none;
+    color: white;
+}
+
+.user-logout:hover{
+    border-radius: 35px;
+    background-color: rgb(63, 63, 245);
+    width: 80%;
+    left: 10px;
+    cursor: pointer;
+}
+
+.dolar{
+    color: white;
+    transition: 0.3s ease-out;
+}
+
+.user:hover .dolar{
+    color: rgb(18, 236, 18);
+    text-shadow: 2px 0px rgb(108, 255, 108);
+
+}
+
+.user-slika{
+    width: 70px;
+}
+.image-block{
+    width: 300px;
+    height: 97%;
+    place-content: center;
+    display: flex;
+    margin-top: -3px;
+    border: 1px solid #aa00ff;
+    border-radius: 35px;
+    box-shadow: -4px 0px #aa00ff;
+    overflow: hidden;
+    transition: 0.2s ease-in;
+}
+
+.image-block:hover{
+    box-shadow: 5px 0px #aa00ff;
+}
+
+.manage-players{
+    display: flex;
+    place-content: center;
+    justify-content: space-evenly;
+
+}
+
+.change-name{
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: 0.2s ease-in;
+    margin-left: 5px;
+}
+
+.change-name:hover{
+    scale: 1.2;
+}
+
+.cs-icon{
+    width: 50px;
+    height: 50px;
+}
+
+.server-hostname{
+    font-size: 18px;
+    width: 280px;
+}
+
+
+#snackbar {
+    display: none; /* Hide the snackbar by default */
+    position: fixed;
+    bottom: 15;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    font-size: 25px;
+    z-index: 1;
+    animation-name: example2, prikazimodal;
+    animation-duration: 5s;
+    animation-iteration-count:infinite;
+    transition: 3s bottom ease;
+}
+
+@keyframes prikazimodal {
+    from {
+        bottom: -20;
+    }
+    to {
+        bottom: 20;
+    }
+}
+
+#snackbar-restart {
+    display: none; /* Hide the snackbar by default */
+    position: fixed;
+    bottom: 15;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 25px;
+    animation-name: example2, prikazimodal;
+    animation-duration: 4s;
+    animation-iteration-count:infinite;
+    transition: 3s bottom ease;
+}
+
+
+#snackbar-stop {
+    display: none; /* Hide the snackbar by default */
+    position: fixed;
+    bottom: 15;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: #fff;
+    padding: 15px;
+    border-radius: 5px;
+    z-index: 1;
+    font-size: 25px;
+    animation-name: example2, prikazimodal;
+    animation-duration: 4s;
+    animation-iteration-count:infinite;
+    transition: 3s bottom ease;
+}
+
+.snackbar-content{
+    width: 500px;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.snackbar-icon{
+    width: 70px;
+}
+
+
+#snackbar-error {
+    display: none;
+    min-width: 250px;
+    margin-left: -225px;
+    background-color: #e74c3c;
+    color: #fff;
+    text-align: center;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    border-radius: 8px;
+}
+
+#snackbar-error.show {
+    display: block;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+}
+
+.configure-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 650px;
+}
+
+
+#updateServerForm{
+    color: white;
+    display: grid;
+    gap: 5px;
+    width: 40%;
+    padding: 100px;
+    border-radius: 15px;
+
+    animation-name: example2;
+    animation-duration: 180s;
+    animation-iteration-count:infinite;
+
+}
+
+#updateServerForm input{
+    height: 35px;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    color: white;
+    border: 1px solid #aa00ff;
+}
+
+#updateServerForm button{
+    width: 60%;
+    background: linear-gradient(245deg, rgba(42,3,80,1) 0%, rgba(105,7,166,1) 100%);
+    place-self: center;
+    color: white;
+    border: 5px solid #aa00ff;
+    height: 45px;
+    border-radius: 7px;
+}
+
+
+
+
+  
+  @-webkit-keyframes fadein {
+    from {bottom: 0; opacity: 0;} 
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 30px; opacity: 1;}
+  }
+  
+  @-webkit-keyframes fadeout {
+    from {bottom: 30px; opacity: 1;} 
+    to {bottom: 0; opacity: 0;}
+  }
+  
+  @keyframes fadeout {
+    from {bottom: 30px; opacity: 1;}
+    to {bottom: 0; opacity: 0;}
+  }
+
+  @media only screen and (max-width: 1024px) {
+
+
+    .wrapper{
+        scale: 0.7;
+    }
+    }
+
+
+  @media only screen and (max-width: 768px) {
+  .main{
+    scale: 0.5;
+    margin-left: 150px;
+  }
+
+  .sidebar{
+    grid-area: unset;
+    transform: rotate(-90deg);
+    justify-self: center;
+    margin-top: 550px;
+    scale: 0.7;
+}
+  
+
+  .sidebar-link{
+    transform: rotate(90deg);
+  }
+}

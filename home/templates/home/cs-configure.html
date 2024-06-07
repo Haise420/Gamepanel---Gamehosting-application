@@ -1,0 +1,242 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="stylesheet" href="{% static 'js/cs.js' %}" class="js">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Webftp</title>
+    
+</head>
+<body>
+
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">{{ customer.balance }} <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+    
+    <div class="content">       
+        <hr>    
+    <div class="configure-content">
+
+
+        <form id="updateServerForm" method="post">
+            {% csrf_token %}
+            <label for="name">Naziv:</label>
+            <input type="text" id="name" name="name" value="{{ server.label }}">
+            <br>
+            <label for="startup_line">Startup Line:</label>
+            <input type="text" id="startup_line" name="startup_line" value="{{ server.startup_line }}">
+            <br>
+            <label for="rcon_password">RCON Password:</label>
+            <input type="text" id="rcon_password" name="rcon_password" value="{{ server.rcon_password }}">
+            <br>
+            <label for="sv_downloadurl">Fast Download Url:</label>
+            <input type="text" id="sv_downloadurl" name="sv_downloadurl" value="{{ sv_downloadurl }}">
+            <br>
+            <button data-server-id="{{ server.id }}" type="submit">Azuriraj konfiguraciju</button>
+        </form>
+        
+
+
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+<div id="snackbar-error" data-error="{{ json_response }}"></div>
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script src="{% static 'js/cs.js' %}"></script>
+
+
+<script>
+$(document).ready(function() {
+    $('[data-server-id]').on('click', function() {
+        var serverId = $(this).data('server-id');
+        updateServerFields(serverId);
+    });
+});
+
+function updateServerFields(serverId) {
+    var name = $('#name').val();
+    var startupLine = $('#startup_line').val();
+    var rconPassword = $('#rcon_password').val();
+    var svDownloadUrl = $('#sv_downloadurl').val();
+
+    
+
+
+    // Include only non-empty fields in the data object
+    var data = {
+        'csrfmiddlewaretoken': $('input[name=csrfmiddlewaretoken]').val(),
+    };
+
+    if (name.trim() !== '') {
+        data['name'] = name;
+    }
+
+    if (startupLine.trim() !== '') {
+        data['startup_line'] = startupLine;
+    }
+
+    if (rconPassword.trim() !== '') {
+        data['rcon_password'] = rconPassword;
+    }
+
+    if (svDownloadUrl.trim() !== '') {
+        data['sv_downloadurl'] = svDownloadUrl;
+    }
+
+    
+
+    $.ajax({
+        type: 'POST',
+        url: '/cs_configure/' + serverId + '/',
+        data: data,
+        success: function(data) {
+            if (data.status === 'Success') {
+                // Handle success
+                console.log('Fields updated successfully.');
+                location.reload();
+            } else {
+                // Handle error
+                console.error('Error:', data.error || 'Unknown error');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Error:', status, error);
+            // Handle error if necessary
+        }
+    });
+}
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        var snackbar = document.getElementById('snackbar-error');
+        var jsonDataString = snackbar.getAttribute('data-error');
+
+        try {
+            var jsonData = JSON.parse(jsonDataString);
+
+            // Automatski popunjavamo sadržaj div-a ako su JSON podaci popunjeni
+            if (jsonData) {
+                snackbar.innerText = jsonData.error || '';  // Koristimo error iz JSON-a, ako postoji
+            }
+
+            // Proveravamo da li postoji JSON odgovor i prikazujemo Snackbar
+            if (jsonData) {
+                if (jsonData.status === 'Error') {
+                    showSnackbar(jsonData.error, 'error');
+                } else if (jsonData.status === 'Success') {
+                    showSnackbar('Uspešno ažurirano!', 'success');
+                }
+            }
+        } catch (error) {
+            console.error('Greška prilikom parsiranja JSON-a:', error);
+            // Ako se desi greška prilikom parsiranja, možete postaviti podrazumevane vrednosti ili neki drugi tretman.
+        }
+    });
+
+    // Funkcija za prikazivanje Snackbar-a
+    function showSnackbar(message, status) {
+        var snackbar = document.getElementById('snackbar-error');
+        snackbar.innerText = message;
+
+        // Postavljamo display: block samo ako je div popunjen
+        snackbar.style.display = message.trim() !== '' ? 'block' : 'none';
+
+        snackbar.className = status + ' show';
+
+        setTimeout(function(){
+            snackbar.className = '';
+            snackbar.style.display = 'none';  // Sakrijemo Snackbar nakon animacije
+        }, 3000);  // Snackbar će se automatski sakriti nakon 3 sekunde
+    }
+</script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,118 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Home</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ customer }}
+                    </div>
+                    <div class="user-balance">{{ customer.balance }} <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            
+            <div class="main">
+                <div class="slider-info">
+                    <img class="slider-info-img" id="div1" src="{% static 'images/sg-winter.png' %}">
+                    <div class="informacije" style="display: none;"  id="div2">
+                        <img src="{% static 'images/logo.png' %}" style="width: 250px;margin-left: 40%;margin-top: 15px;">
+                        <div class="info-text">v1.3 Gamepanel Beta 09/12/2023 <br> Sredjen Console <br> Small bugfixes</div>
+
+                        <div class="info-text">v1.2 Gamepanel Beta 04/12/2023 <br> Small bugfixes</div>
+
+                        <div class="info-text">v1.1 Gamepanel Beta 02/12/2023 <br> Sredjen WebFTP i Mods</div>
+
+                        <div class="info-text">v1.0 Pilot - Gamepanel<br>Rodjenje gamepanela 09/11/2023</div>
+
+                        
+
+                        
+
+                        
+                        
+                    </div>
+    
+                </div>
+                <div class="main-updates">
+                    <button class="updates" id="showButton">
+                        <img src="{% static 'images/updates.png' %}" class="updates-icon" alt="">
+                        <div class="informacije-text">Updates</div>
+
+                    </button>
+                </div>
+                <div class="main-info">
+                    <button class="informacije-button" id="hideButton">
+                        <img src="{% static 'images/info.png' %}" class="informacije-icon" alt="">
+                        <div class="informacije-text">Informacije</div>
+                        
+                    </button>
+                </div>
+            </div>
+    
+            <div class="sidebar">
+
+                 <div class="sidebar-link" data-hover-text="Home">
+                    <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Servers">
+                    <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="Support">
+                    <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+                </div>
+    
+                <div class="sidebar-link" data-hover-text="User Panel">
+                    <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+
+
+
+    <script>
+        // Dohvatanje elemenata i dugmeta
+const div1 = document.getElementById('div1');
+const div2 = document.getElementById('div2');
+const hideButton = document.getElementById('hideButton');
+
+// Dodavanje Event Listener-a na dugme
+hideButton.addEventListener('click', () => {
+    // Primena stila display: none na prvi div
+    div1.style.display = 'none';
+    // Možete takođe vratiti prikaz drugog div-a ako je već bio sakriven
+    div2.style.display = 'block'; // ili 'initial', 'inline', itd. zavisno od potrebe
+});
+
+
+showButton.addEventListener('click', () => {
+    // Primena stila display: none na prvi div
+    div1.style.display = 'block';
+    // Možete takođe vratiti prikaz drugog div-a ako je već bio sakriven
+    div2.style.display = 'none'; // ili 'initial', 'inline', itd. zavisno od potrebe
+});
+    </script>
+
+
+</body>
+</html>

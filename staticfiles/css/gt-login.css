@@ -1,0 +1,592 @@
+.scroller {
+    max-width: 1400px;
+  }
+  
+  .scroller__inner {
+    padding-block: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+  }
+  
+  .scroller[data-animated="true"] {
+    overflow: hidden;
+    -webkit-mask: linear-gradient(
+      90deg,
+      transparent,
+      white 20%,
+      white 80%,
+      transparent
+    );
+    mask: linear-gradient(90deg, transparent, white 20%, white 80%, transparent);
+  }
+  
+  .scroller[data-animated="true"] .scroller__inner {
+    flex-wrap: nowrap;
+    animation: scroll var(--_animation-duration, 40s)
+      var(--_animation-direction, forwards) linear infinite;
+  }
+  
+  .scroller[data-direction="right"] {
+    --_animation-direction: reverse;
+  }
+  
+  .scroller[data-direction="left"] {
+    --_animation-direction: forwards;
+  }
+  
+  .scroller[data-speed="fast"] {
+    --_animation-duration: 20s;
+  }
+  
+  .scroller[data-speed="slow"] {
+    --_animation-duration: 60s;
+  }
+
+  
+  @keyframes scroll {
+    to {
+      transform: translate(calc(-50% - 0.5rem));
+    }
+  }
+
+
+
+
+html, body{
+    background-image: url(/static/images/sg-bg.png);
+    background-size:cover;
+    font-family: 'CodecColdTrialBold', sans-serif;
+    height: 1200px;
+    color: white;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    background-size: 100% 100%;
+}
+
+
+.bg{
+    width: 100%;
+    height: 1200px;
+    justify-content: center;
+    display: flex;
+
+}
+
+.wrapper{
+    grid-template:  'nav nav nav nav'
+                    'server-pole server-pole server-pole server-pole'
+                    'login-content login-content login-content login-content'
+                    'login-content login-content login-content login-content'
+                    'login-content login-content login-content login-content'
+                    'login-content login-content login-content login-content'
+                    'footer footer footer footer'
+                    'footer footer footer footer'
+                    'footer footer footer footer';
+    display: grid;
+    max-width: 1400px;
+    position: relative;
+    width: 100%;
+    gap: 10px;
+    height: 1200px
+}
+
+.nav{
+  background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+  width: 75%;
+  height: 60px;
+  border-radius: 140px;
+  grid-area: nav;
+  background-color: solid white;
+  border: 1px solid #aa00ff;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  place-items: center;
+  text-align: center;
+  justify-self: center;
+}
+
+.navlink{
+  border: 1px solid #aa00ff;
+  width: 150px;
+  height: 50px;
+  border-radius: 15px;
+  position: relative;
+  font-weight: 800;
+  transition: 0.1s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 1px 1px #aa00ff;
+  animation-name: shine;
+  animation-duration: 120s;
+  animation-iteration-count: infinite;
+  cursor: pointer;
+  gap: 5px;
+}   
+
+.navlink:hover{
+  background-image: url(/static/images/header.png);
+  background-size: cover;
+  text-shadow: 1px 1px rgb(24, 0, 34);
+  gap: 10px;
+
+}
+
+.navlink:hover .navlink-icon{
+
+scale: 1.1;
+}
+
+.navlink:hover .linktext{
+  color: #e1b0fa;
+  scale: 1.1;
+  text-decoration: none;
+}
+
+.navlink-icon{
+width: 25px;
+transition: 0.1s ease-in;
+}
+
+.linktext{
+  color: white;
+  text-decoration: none;
+  transition: 0.1s ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.server-pole {
+  color: white;
+  background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+  width: 100%;
+  height: 75px;
+  grid-area: server-pole;
+  border: 1px solid #aa00ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-top-left-radius: 5% 95% 5% 95% / 100% 0% 100% 0%;
+  transition: 0.2s ease-in-out;
+  animation: morph 12s ease-in-out infinite both alternate;
+}
+
+
+.server-pole-img{
+  position: absolute;
+  top: 45;
+  left: -30;
+  z-index: 50;
+  width: 150px;
+  height: 130px;
+  display: block;
+}
+
+@keyframes morph {
+  0% {border-radius: 5% 5% 5% 5% / 5% 5% 5% 5%;} 
+  100% {border-radius: 15% 15%;} 
+}
+
+.server{
+  background-image: url(/static/images/cs-banner.png);
+  background-size: cover;
+  place-items: center;
+  justify-content: center;
+  min-width: 350px;
+  overflow: hidden;
+  display: grid;
+  height: 80%;
+  padding: 15px;
+  font-size: 17px;
+  border-right: 1px solid #aa00ff;
+  border-left: 25px solid #540b79;
+}
+
+.server p{
+  height: 18px;
+  margin: 0;
+  overflow: hidden;
+}
+
+.server-game-icon{
+  width: 17px;
+  height: 17px;
+  margin-top: 3px;
+  margin-bottom: 0px;
+}
+
+.rank_hostname_server_bar{
+  position: absolute;
+  top: 11;
+  gap: 20px;
+  left: 13;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.ip_status_server_bar{
+  position: absolute;
+  top: 41;
+  left: 13;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  font-size: 15px;
+}
+
+
+
+.rank_id_server_bar{
+  position: absolute;
+  top: 0;
+  left: 6;
+  font-size: 17px;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.server-status{
+  position: absolute;
+  top: 0;
+  gap: 20px;
+  left: 150;
+  width: 150px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.hostname_server_bar{
+  position: absolute;
+  top: 2;
+  left: 60;
+  font-size: 15px;
+  color: white;
+  text-decoration: none;
+  width: 217px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  justify-content: start;
+  align-items: center;
+  display: flex;
+  transition: 0.2s ease-in-out;
+} 
+
+.hostname_server_bar:hover{
+  color: #d684ff;
+}
+
+.login-content{
+    width: 100%;
+    height: 650px;
+    border: 1px solid #aa00ff;
+    grid-area: login-content;
+    display: flex;
+}
+
+.login-main{
+    display: grid;
+    place-content: center;
+    place-items: center;
+    width: 50%;
+    background: linear-gradient(312deg, rgba(18,0,36,0.5) 0%, rgba(78,9,121,0.5) 100%);
+    height: 100%;
+    border: 1px solid #aa00ff;
+}
+
+.login-info{
+    width: 50%;
+    height: 100%;
+    border: 1px solid #aa00ff;
+}
+
+.footer{
+  background-image: url(/static/images/footer.png);
+  background-size: cover;
+  color: white;
+  width: 100%;
+  height: 200px;
+  border: 1px solid #aa00ff;
+  grid-area: footer;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.footer-image{
+height: 80%;
+width: 30%;
+
+}
+
+.footer-img{
+height: 100%;
+width: 100%;
+}
+
+.footer-links{
+display: flex;
+
+
+}
+
+.footer-link{
+font-weight: 800;
+font-size: 23px;
+width: 150px;
+display: flex;
+justify-content: center;
+align-items: center;
+transition: 0.2s ease-in-out;
+cursor: pointer;
+
+}
+
+.footer-link a{
+text-decoration: none;
+font-size: 19px;
+color: white;
+}
+
+.footer-link:hover{
+border-radius: 10px;
+background-color: #aa00ff;
+}
+
+
+.insta-icon{
+width: 50px;
+transition: 0.2s ease-in-out;
+
+}
+
+.insta-icon:hover{
+cursor: pointer;
+animation-name: bounce;
+animation-duration: 1s;
+animation-iteration-count: 1;
+}
+
+.fb-icon{
+width: 50px;
+
+}
+
+.fb-icon:hover{
+cursor: pointer;
+animation-name: bounce;
+animation-duration: 1s;
+animation-iteration-count: 1;
+}
+
+.slika{
+  width: 100%;
+  height: 100%;
+}
+
+.loginunos{
+  height: 40px;
+  
+  width: 100%;
+  border: 1px solid #aa00ff;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(198, 198, 255);
+  text-align: center;
+
+}
+
+.loginunos::placeholder{
+  color: #aa00ff;
+  text-shadow: 1px 1px #ffffff;
+  font-weight: 700;
+}
+
+
+.registerunos{
+  height: 40px;
+  width: 100%;
+  padding: 10px;
+  border-radius: 20px;
+  background-color: rgb(198, 198, 255);
+}
+.unosclass{
+  display: flex;
+  height: 100px;
+  width: 220px;
+  position: relative;
+}
+
+.unosclass-password{
+  display: flex;
+  height: 100px;
+  width: 220px;
+  position: relative;
+
+}
+
+.registerclass{
+  display: grid;
+  height: 200px;
+  width: 220px;
+  position: relative;
+}
+
+.logindugme{
+  height: 55px;
+  border-radius: 60px;
+  cursor: pointer;
+  border: 1px solid #aa00ff;
+
+  background: linear-gradient(146deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+  font-size: 20px;
+  font-weight: 800;
+  color: aliceblue;
+  width: 220px;
+  transition: 0.3s ease-in-out;
+     
+
+
+}
+.logindugme:hover{
+  background-color: rgb(0, 0, 255);
+  transition: background-color 0.4s ease-in;
+  border: 1px solid white;
+}
+
+.logindemodugme{
+  height: 55px;
+  border-radius: 60px;
+  cursor: pointer;
+  border: 1px solid #aa00ff;
+  margin-top: 5px;
+  background: linear-gradient(146deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+  font-size: 20px;
+  font-weight: 800;
+  color: aliceblue;
+  width: 130px;
+  transition: 0.3s ease-in-out;
+  margin-left: 45px;
+
+}
+.logindemodugme:hover{
+  background-color: rgb(0, 0, 255);
+  transition: background-color 0.4s ease-in;
+  border: 1px solid white;
+}
+
+.login-dugmad{
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.registerdugme{
+  height: 55px;
+  border-radius: 60px;
+  cursor: pointer;
+  border: 1px solid #aa00ff;
+  margin-top: 50px;
+  background: linear-gradient(146deg, rgba(18,0,36,1) 0%, rgba(78,9,121,1) 100%);
+  font-size: 20px;
+  font-weight: 800;
+  color: aliceblue;
+  width: 220px;
+  transition: 0.3s ease-in-out;
+     
+
+
+}
+
+.napravinalog{
+  text-decoration: none;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+  font-weight: 900;
+  cursor: pointer;  
+  margin-top: 25px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  padding: 5px;
+  transition: 0.3s ease-in;
+}
+.napravinalog:hover{
+  text-shadow: 4px 0px rgb(109, 6, 149);
+  
+}
+
+.passwordicon{
+  position: absolute;
+  width: 35px;
+  top: 2;
+  left: 0;
+  margin-left: -40px;
+}
+
+.usernameicon{  
+  position: absolute;
+  width: 35px;
+  top: 2;
+  left: 0;
+  margin-left: -40px;
+}
+.passwordicon-register{
+  position: absolute;
+  width: 35px;
+  top: 52;
+  left: 0;
+  margin-left: -40px;
+}
+.repasswordicon{
+  position: absolute;
+  width: 35px;
+  top: 102;
+  left: 0;
+  margin-left: -40px;
+}
+
+.mobile-logo{
+  height: 150px;
+  width: 150px;
+  position: absolute;
+  top: 30;
+  left: 90;
+  margin: 0px;
+  display: none;
+}
+
+
+.emailicon{
+  position: absolute;
+  width: 35px;
+  top: 152;
+  left: 0;
+  margin-left: -40px;
+}
+
+@keyframes bounce {
+  0%   {scale: 1;}
+  50%   {scale: 0.9;}
+  100%  {scale: 1;}
+
+}
+
+@keyframes shine {
+  0%   {box-shadow: inset 2px 0px 10px 1px #aa00ff;}
+  10%  {box-shadow: inset 2px 2px 15px 1px #aa00ff}
+  30%  {box-shadow: inset 2px 2px 10px 1px #aa00ff}
+  50%  {box-shadow: inset -3px -3px 5px 1px #aa00ff}
+  70% {box-shadow: inset -4px -4px 5px 1px #aa00ff}
+  100%   {box-shadow: inset 0px 3px 10px 1px #aa00ff}
+}

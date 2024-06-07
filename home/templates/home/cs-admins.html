@@ -1,0 +1,319 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Admins</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">420 <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+
+    <div class="content">     
+        <hr class="hr">       
+    <div class="admins-content">
+        <div id="current-path" style="display: none;">{{ current_dir }}</div>
+        <div class="admins-header">
+            
+            <div class="admins-img">
+                <img src="{% static 'images/nav-admins.png' %}" alt="" class="adm-image">
+
+            </div>
+            <div class="admins-text">
+                <h3>Admins</h3>
+                <p>Ovde mozete da pratite i dodajete admine kao i permisije vasim igracima.</p>
+            </div>
+
+        </div>
+
+        <div id="current-path" style="display: none;">{{ current_dir }}</div>
+
+        <div class="admins-overview">
+            <table class="admins-table" id="userData">
+                <thead>
+                    <tr>
+                        <th>SteamID / Nickname</th>
+                        <th>Password</th>
+                        <th>Permisije</th>
+                        <th>AccFlags</th>
+                        <th>Opis</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+
+
+        <div class="admins-controls">
+            <div class="add-admin-btn" onclick="openModal()">Dodaj Admina</div>
+        
+            <!-- Modalni prozor -->
+            <div id="myModal" class="modal">
+                <div class="modal-content">
+                    <span class="close" onclick="closeModal()">&times;</span>
+                    <div class="modal-content-grid">
+                        {% csrf_token %}
+                        <input class="modal-input" type="text" id="newSteamid" placeholder="SteamID / Username">
+                        <input class="modal-input" type="text" id="newPassword" placeholder="Password">
+                        <input class="modal-input" type="text" id="newPermissions" placeholder="Permisije">
+                        <input class="modal-input" type="text" id="newAccflags" placeholder="AccFlags">
+                        <button class="save-new-line-button" onclick="addNewLine()" type="button">Potvrdi</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script src="{% static 'js/cs.js' %}"></script>
+
+
+<script>
+    function openModal() {
+        $('#myModal').css('display', 'block');
+    }
+
+    function closeModal() {
+        $('#myModal').css('display', 'none');
+    }
+
+    function addNewLine() {
+    var newSteamid = $('#newSteamid').val();
+    var newPassword = $('#newPassword').val();
+    var newPermissions = $('#newPermissions').val();
+    var newAccflags = $('#newAccflags').val();
+    var newDescription = "nema"; // Fiksna vrednost
+
+    // Formiranje nove linije za dodavanje na kraj dokumenta
+    var newLine = '"' + newSteamid + '" "' + newPassword + '" "' + newPermissions + '" "' + newAccflags + '"';
+
+    // URL stranice na kojoj se nalazi ftp-file-content
+    var otherPageUrl = "{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/users.ini/";
+
+    // AJAX poziv za preuzimanje sadržaja stranice
+    $.ajax({
+        url: otherPageUrl,
+        type: 'GET',
+        success: function (data) {
+            // Pronalazi textarea sa klasom ftp-file-content
+            var textareaContent = $(data).find('.ftp-file-content').val();
+
+            // Dodavanje nove linije na kraj postojećeg sadržaja
+            var updatedContent = textareaContent + '\n' + newLine;
+            // Pozivanje funkcije za čuvanje dokumenta
+            saveFileContent(updatedContent);
+
+            // Zatvaranje modalnog prozora
+            closeModal();
+
+            // Opciono: Resetovanje vrednosti polja nakon dodavanja
+            $('#newSteamid').val('');
+            $('#newPassword').val('');
+            $('#newPermissions').val('');
+            $('#newAccflags').val('');
+        },
+        error: function () {
+            console.error('Greška prilikom preuzimanja sadržaja.');
+        }
+    });
+}
+
+// Funkcija za čuvanje ažuriranog sadržaja dokumenta
+function saveFileContent(updatedContent) {
+    var serverId = parseInt("{{ server.id }}", 10);
+
+    // Uzimanje vrednosti currentPath sa servera
+    var currentPath = "/{{ server.port }}/cstrike/addons/amxmodx/configs/users.ini/";
+
+    fetch(`/cs/edit_admins/${serverId}${encodeURIComponent(currentPath)}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCSRFToken(),  // Include CSRF token if required
+        },
+        body: `file_content=${encodeURIComponent(updatedContent)}&current_path=${(currentPath)}`,
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.text();
+    })
+    .then(result => {
+        console.log('File saved successfully:', result),
+        location.reload();
+    })
+    .catch(error => {
+        console.error('Error saving file content:', error);
+    });
+}
+
+
+
+    function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+</script>
+
+
+
+<script>
+// Inicijalno sakrij sve div-ove osim "overview-content"
+const elementsToHide = document.querySelectorAll('.hidden');
+for (const element of elementsToHide) {
+element.style.display = 'none';
+}
+
+function toggleVisibility(target) {
+// Sakrij sve div-ove sa klasom "hidden"
+for (const element of elementsToHide) {
+element.style.display = 'none';
+}
+
+// Prikaži ciljni div
+const targetElement = document.querySelector(`.${target}-content`);
+if (targetElement) {
+targetElement.style.display = 'block';
+}
+}
+
+</script>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        // URL stranice na kojoj se nalazi ftp-file-content
+        var otherPageUrl = "{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/users.ini/";
+
+        // AJAX poziv za preuzimanje sadržaja stranice
+        $.ajax({
+            url: otherPageUrl,
+            type: 'GET',
+            success: function (data) {
+                // Pronalazi textarea sa klasom ftp-file-content
+                var textareaContent = $(data).find('.ftp-file-content').text();
+                
+
+                // Parsiranje sadržaja textarea
+                var lines = textareaContent.split('\n');
+                var parsedData = [];
+
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i].trim();
+                    if (line.startsWith('"')) {
+                        parsedData.push(line);
+                    }
+                }
+
+
+                // Razdvajanje i dodavanje u tabelu
+                var userDataTable = $('#userData tbody');
+
+                for (var i = 0; i < parsedData.length; i++) {
+                    var line = parsedData[i].replace(/"/g, ''); // Uklanjanje navodnika
+                    var data = line.split(' ');
+
+                    // Provera dužine niza pre nego što pristupite elementima kako biste izbegli greške
+                    if (data.length === 4) {
+                        var steamid = data[0];
+                        var password = data[1];
+                        var flags = data[2];
+                        var accflags = data[3];
+                        var description = "nema";
+
+                        // Dodavanje reda u tabelu
+                        userDataTable.append('<tr><td>' + steamid + '</td><td>' + password + '</td><td>' + flags + '</td><td>' + accflags + '</td><td>' + description + '</td></tr>');
+                    }
+                }
+            },
+            error: function () {
+                console.error('Greška prilikom preuzimanja sadržaja.');
+            }
+        });
+
+
+    });
+</script>
+
+
+</body>
+</html>

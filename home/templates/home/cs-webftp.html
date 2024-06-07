@@ -1,0 +1,272 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="stylesheet" href="{% static 'js/cs.js' %}" class="js">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Webftp</title>
+    
+</head>
+<body>
+
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">{{ customer.balance }} <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div id="NavButton" class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+    
+    <div class="content">       
+        <hr>    
+    <div class="webftp-content">
+        <div class="ftp-header">
+        
+        <div class="ftp-img">
+            <img src="{% static 'images/nav-webftp.png' %}" alt="" class="ftp-image">
+        </div>
+        <div class="ftp-text">
+            <h3>WebFTP <br></h3>
+            Ovde imate kompletan pregled FTP-a i mozete da editujete fajlove od vaseg servera. Upload i download ce biti dostupni u Alpha verziji.
+        </div>
+    
+        <div class="ftp-controls">
+            <button id="ftp-save-button" onclick="saveFileContent(document.querySelector('.ftp-content').value)">Sačuvaj izmene</button>
+
+        </div>
+        
+    </div>
+    
+    <div class="ftp-shortcuts">
+        <a href="{% url 'cs-overview' server.id %}" class="refresh"><img class="refresh-button" src="{% static 'images/refresh.png' %}" alt=""></a>
+        <div class="controls-separator"></div>
+        <p class="shortcut-label">Shortcuts →</p>
+        <a class="shortcut-name" href="{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/server.cfg/">server.cfg</a>
+       
+        <a class="shortcut-name" href="{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/users.ini/" onclick="openEditAdmins()">users.ini</a>
+        
+        <a class="shortcut-name" href="{% url 'edit_files' server_id=server.id file_path=server.port %}/cstrike/addons/amxmodx/configs/plugins.ini/">plugins.ini</a>
+        <div class="controls-separator"></div>
+        <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/">cstrike</a>
+
+        
+        <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/models/">models</a>
+        
+        <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/maps/">maps</a>
+        
+        <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/sound/">sounds</a>
+        
+        <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/addons/amxmodx/configs/">configs</a>
+        <a class="shortcut-name" href="{% url 'cs_webftp' server_id=server.id current_dir=server.port %}/cstrike/addons/amxmodx/plugins/">plugins</a>
+
+
+    </div>
+    <hr class="hr-ftpwindow">
+    <div class="ftp-window">
+        {% csrf_token %}
+        <div class="ftp-dir-tab">
+            <img class="dir-icon" src="{% static 'images/dir.PNG' %}" alt="">
+            <a href="{{request.META.HTTP_REFERER|escape}}" class="ftp-item">← Nazad.. </a>
+
+        </div>
+        <div id="current-path" style="display: none;">{{ current_dir }}</div>
+        <textarea class="ftp-content" id="ftp-content" rows="10" cols="50" style="display: none;"></textarea>
+
+        {% for item in file_list %}
+        <div class="ftp-dir-tab">
+            {% if item.type == 'dir' %}
+                <img class="dir-icon" src="{% static 'images/dir.PNG' %}" alt="">
+            {% else %}
+                {% with is_text_file=is_text_file %}
+                    <img class="dir-icon" id="file{{ forloop.counter }}" src="{% static 'images/file.png' %}" alt="">
+                {% endwith %}
+                <a class="ftp-item" href="" onclick="handleItemClick('{{ item }}', '{{ item.type }}', event)">{{ item }}</a>
+            {% endif %}
+        </div>
+    {% endfor %}
+    
+    
+
+
+
+    </div>
+
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+<script>
+    window.addEventListener('load', function () {
+        {% for item in file_list %}
+            {% if item.type != 'dir' %}
+                var isTextFile = /\.(txt|cfg|ini|tga|wad|hpk|ico|fgd|bsp|res|ztmp|nav|vdf|dll|so|dylib|lst|mdl|spr|wav|mp3|html|bmp|lmp|pcx|htm|icns|log|scr|inf|sma|amxx|sh|sql|sq3|games)$/i.test('{{ item }}');
+                var imgElement = document.getElementById('file{{ forloop.counter }}');
+                if (!isTextFile) {
+                    imgElement.src = "{% static 'images/dir.PNG' %}";
+                }
+            {% endif %}
+        {% endfor %}
+    });
+</script>
+
+
+<script src="{% static 'js/cs.js' %}"></script>
+
+
+
+
+<script>
+
+
+function handleItemClick(name, type, event) {
+    event.preventDefault();
+
+    var serverId = parseInt("{{ server.id }}", 10);
+
+    const currentPathElement = document.getElementById('current-path');
+
+    const currentPath = currentPathElement.innerText;
+    const newPath = currentPath ? `${currentPath}/${name}` : name;
+
+    if (type === 'dir') {
+        window.location.href = `/cs/webftp/${serverId}/${encodeURIComponent(newPath)}/`;
+    } else {
+        const isTextFile = /\.(txt|log|ini|cfg)$/i.test(name);
+
+        if (isTextFile) {
+            fetch(`/cs/fetch_file_content/${serverId}/${encodeURIComponent(newPath)}/`)
+                .then(response => response.text())
+                .then(data => {
+                    const formattedData = data;
+
+                    // Display the Save button and content textarea
+                    document.getElementById('ftp-save-button').style.display = 'inline-block';
+                    document.getElementById('ftp-content').style.display = 'inline-block';
+
+                    // Set the content in the textarea
+                    document.querySelector('.ftp-content').value = formattedData;
+
+                    // Save the filename for future reference
+                    document.getElementById('ftp-save-button').setAttribute('data-filename', name);
+                })
+                .catch(error => {
+                    console.error('Error fetching file content:', error);
+                });
+        } else {
+            window.location.href = `/cs/webftp/${serverId}/${encodeURIComponent(newPath)}/`;
+            console.log(`Clicked on file: ${newPath}`);
+        }
+    }
+}
+
+
+
+function saveFileContent(updatedContent) {
+    var serverId = parseInt("{{ server.id }}", 10);
+    var fileName = document.getElementById('ftp-save-button').getAttribute('data-filename');
+    var currentPath = document.getElementById('current-path').innerText;
+    
+    fetch(`/cs/edit_file/${serverId}/${encodeURIComponent(fileName)}/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-CSRFToken': getCSRFToken(),  // Include CSRF token if required
+        },
+        body: `file_content=${encodeURIComponent(updatedContent)}&current_path=${encodeURIComponent(currentPath)}`,
+    })
+    .then(response => response.json())  // Assuming the response is in JSON format
+    .then(result => {
+        console.log('File saved successfully:', result);
+        window.location.href = `/cs/webftp/${serverId}/${encodeURIComponent(currentPath)}/`;
+        
+    })
+    .catch(error => {
+        console.error('Error saving file content:', error);
+    });
+}
+
+function getCSRFToken() {
+    return document.querySelector('[name=csrfmiddlewaretoken]').value;
+}
+
+
+</script>
+
+
+
+
+
+
+</body>
+</html>

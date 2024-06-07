@@ -1,0 +1,40 @@
+{% load static%}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>agp-machines</title>
+    <link rel="stylesheet" href="{% static 'css/agp-machines.css' %}" class="css">
+</head>
+<body>
+    <div class="wrapper">
+        
+        <div class="nav"></div>
+        <div class="main">
+            <div class="uptime-graph"></div>
+            <div class="machine-content">
+                <div class="machine-header">
+                    <div class="add-machine"></div>
+                    <div class="error-logs"></div>
+                </div>
+                <div class="machine-main">
+                    {% for machine in machines %}
+                    <div class="machine-box">
+                        <img src="{% static 'images/box-img.png' %}" class="box-img">
+                        <a style="text-decoration: none;color: white;" href="{% url 'agp-machines-detail' machine.id %}">
+                            <br>
+                            {{ machine.name }}<br>
+                            {{ machine.owner }}<br>
+                            {{ machine.is_active }}<br>
+                            {{ machine.ip_address }}
+                        </a>
+                    </div>
+                        {% endfor %}
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</body>
+</html>

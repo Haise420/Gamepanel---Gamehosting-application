@@ -1,0 +1,122 @@
+body{
+    background-color: black;
+}
+
+.wrapper{
+    display: grid;
+    grid-template: 'nav main main main'
+                   'nav main main main';
+    justify-content: center;
+    max-width: 100%;
+    height: 1200px;
+    gap: 15px;
+}
+
+.nav{
+    grid-area: nav;
+    border: 1px solid white;
+    width: 200px;
+    height: 100%;
+}
+
+.main{
+    grid-area: main;
+    width: 1200px;
+    height: 100%;
+    border: 1px solid white;
+}
+
+.servers-content{
+    height: 88%;
+    width: 100%;
+    border: 1px solid white;
+    display: grid;
+    grid-template-rows: repeat(10, 100px);
+    gap: 5px;
+}
+
+.server-content{
+    border: 1px solid white;
+    display: flex;
+    height: 100%;
+    gap: 5px;
+}
+
+.servers-edit{
+    width: 100%;
+    height: 10%;
+    border: 1px solid white;
+    display: flex;
+}
+
+.server-checkbox{
+    margin-top: 10px;
+    width: 5%;
+    height: 80%;
+    margin-left: 10px;
+    margin-left: 10px;
+}
+
+.srv-name{
+    border: 1px solid white;
+    width: 18%;
+    height: 80%;
+    gap: 5px;
+    margin-top: 8px;
+    margin-left: 30px;
+    
+}
+
+.srv-players{
+    border: 1px solid white;
+    width: 18%;
+    height: 80%;
+    gap: 5px;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.srv-ip{
+    border: 1px solid white;
+    width: 18%;
+    height: 80%;
+    gap: 5px;
+    margin-top: 8px;
+    margin-left: 10px;
+}
+
+.srv-online{
+    border: 1px solid white;
+    width: 18%;
+    height: 80%;
+    gap: 5px;
+    margin-top: 8px;
+    margin-left: 170px;
+}
+
+.srv-selected{
+    width: 25%;
+    height: 90%;
+    border: 1px solid white;
+    gap: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+}
+
+.delete-srv{
+    width: 25%;
+    height: 90%;
+    border: 1px solid white;
+    gap: 5px;
+    margin-top: 5px;
+    margin-left: 260px;
+}
+
+.add-srv{
+    width: 25%;
+    height: 90%;
+    border: 1px solid white;
+    gap: 5px;
+    margin-top: 5px;
+    margin-left: 10px;
+}

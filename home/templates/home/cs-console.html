@@ -1,0 +1,207 @@
+{% load static %}
+<html lang="en" class="html">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/cs-overview.css' %}" class="css">
+    <link rel="icon" type="image/x-icon" href="{% static 'images/logo.ico' %}">
+    <title>[ SG:GP ] Console</title>
+</head>
+<body>
+    <div class="wrapper-bg">
+        <div class="wrapper">
+            <div class="user">
+                <div class="user-img">
+                    <img src="{{ customer.img.url }}" class="user-slika">
+                </div>
+                <div class="user-info">
+                    <div class="user-username">
+                        <p style="font-size: 11;margin: -10px;">Dobrodosli,</p> <br>
+                        {{ server.ftp_user }}
+                    </div>
+                    <div class="user-balance">420 <div class="dolar">$</div> </div>
+                    <div class="user-logout">
+                        <a href="{% url 'user_logout' %}" class="logout">Logout</a>
+                    </div>
+                </div>
+    
+            </div>
+            <div class="main">
+                <div class="nav">
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-overview.png' %}" alt="">
+                        <a href="{% url 'cs-overview' server.id %}" class="nav-overview">Overview</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-console.png' %}" alt="">
+                        <a href="{% url 'cs-console' server.id %}" class="nav-console">Console</a>
+                    </div>
+                    <div class="nav-button" >
+                        <img class="nav-icon" src="{% static 'images/nav-webftp.png' %}" alt="">
+                        <a href="{% url 'cs-webftp' server.id %}" class="nav-webftp">WebFTP</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-admins.png' %}" alt="">
+                        <a href="{% url 'cs-admins' server.id %}" class="nav-admins">Admins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-plugins.png' %}" alt="">
+                        <a href="{% url 'cs-plugins' server.id %}" class="nav-plugins">Plugins</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-mods.png' %}" alt="">
+                        <a href="{% url 'cs-mods' server.id %}" class="nav-mods">Mods</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-boost.png' %}" alt="">
+                        <a href="{% url 'cs-boost' server.id %}" class="nav-boost">Boost</a>
+                    </div>
+                    <div class="nav-button">
+                        <img class="nav-icon" src="{% static 'images/nav-backup.png' %}" alt="">
+                        <a href="{% url 'cs-backup' server.id %}" class="nav-backup">Backup</a>
+                    </div>
+                </div>
+                
+    <div class="content">
+        <hr class="console">
+    <div class="console-content">
+
+        <div class="console-header">
+            <div class="console-img">
+                <img src="{% static 'images/nav-console.png' %}" class="console-image">
+            </div>
+       
+        <div class="console-text">
+            
+            <h3>Console</h3>
+            Ovde imate direktan uvid u konzolu vaseg servera, kao i punu kontrolu za slanje novih RCON komandi.
+        </div>
+    </div>
+
+        <div class="console-main">
+            <div id="server-id" data-server-id="{{ server.id }}"></div>
+
+            {% for result in rcon_results %}
+      <p class="rcon-result">{{ result.result }} - {{ result.timestamp }}</p>
+    {% endfor %}
+
+    {% for result in request.session.rcon_results %}
+        <p class="rcon-result">Rezultat: {{ result }}</p>
+    {% endfor %}
+
+    
+
+        </div>
+        <div class="console-controls">
+            <input class="console-input" id="rconCommandInput" placeholder="Unesite RCON komandu.." type="text" onkeyup="handleEnterKey(event)">
+        <button class="send-rcon-btn" type="button" onclick="sendRconCommand()">Pošalji</button>
+            </div>
+
+    </div>
+</div>
+
+</div>
+    
+<div class="sidebar">
+
+     <div class="sidebar-link" data-hover-text="Home">
+        <a href="{% url 'gamepanel' %}"><img class="sidebar-img-home" src="{% static 'images/home.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Servers">
+        <a href="{% url 'gp-servers' %}"><img class="sidebar-img-servers" src="{% static 'images/servers.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="Support">
+        <a href="{% url 'gp-support' %}"><img class="sidebar-img-servers" src="{% static 'images/support.png' %}"></a>
+    </div>
+
+    <div class="sidebar-link" data-hover-text="User Panel">
+        <a href="{% url 'gp-user' %}"><img class="sidebar-img-servers" src="{% static 'images/user.png' %}"></a>
+    </div>
+</div>
+
+</div>
+</div>
+
+
+<script src="{% static 'js/cs.js' %}"></script>
+<script>
+    // Define your functions here
+    function sendRconCommand() {
+        const rconCommandInput = document.getElementById('rconCommandInput');
+        const resultContainer = document.querySelector('.console-main');
+
+        // Dobavi vrednost iz input polja
+        const rconCommand = rconCommandInput.value;
+
+        // Dodaj komandu u niz
+        rconCommands.push(rconCommand);
+
+        // Dobavi server_id iz data atributa
+        const serverIdElement = document.getElementById('server-id');
+
+        if (serverIdElement) {
+            const serverId = serverIdElement.dataset.serverId;
+
+            // Napravi AJAX poziv ka API endpointu
+            fetch(`/api/send_rcon_cs16_server/${serverId}/${encodeURIComponent(rconCommand)}/`)
+                .then(response => response.json())
+                .then(data => {
+                    // Prikazi rezultate u resultContainer
+                    resultContainer.innerHTML = JSON.stringify(data, null, 2);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    resultContainer.innerHTML = 'Došlo je do greške.';
+                })
+                .finally(() => {
+                    // Isprazni input polje nakon što se RCON komanda pošalje
+                    rconCommandInput.value = '';
+                    setTimeout(() => {
+                    location.reload(true);
+                });
+                });
+        }
+    }
+
+    function handleEnterKey(event) {
+        if (event.key === 'Enter') {
+            sendRconCommand();
+        }
+    }
+
+    // Inicijalizuj niz za čuvanje komandi i rezultata
+    const rconCommands = [];
+
+    // The rest of your JavaScript code
+    document.addEventListener('DOMContentLoaded', function () {
+
+    });
+</script>
+
+<script>
+// Inicijalno sakrij sve div-ove osim "overview-content"
+const elementsToHide = document.querySelectorAll('.hidden');
+for (const element of elementsToHide) {
+element.style.display = 'none';
+}
+
+function toggleVisibility(target) {
+// Sakrij sve div-ove sa klasom "hidden"
+for (const element of elementsToHide) {
+element.style.display = 'none';
+}
+
+// Prikaži ciljni div
+const targetElement = document.querySelector(`.${target}-content`);
+if (targetElement) {
+targetElement.style.display = 'block';
+}
+}
+</script>
+
+
+
+</body>
+</html>
